@@ -8,9 +8,50 @@
     <script type="module" src="index.js"></script>
   </head>
   <body>
-    <div class="container py-4 px-3 mx-auto">
-      <h1>Hello, Bootstrap and Parcel!</h1>
-      <button class="btn btn-primary">Primary button</button>
-    </div>
+    <header class="container py-4 px-3 mx-auto">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Player :</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Hight score</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Help</a>
+        </li>
+      </ul>
+    </header>
+    <section class="d-flex justify-content-around">
+      <section>
+        <h1>message</h1>
+      </section>
+      <section>
+        <div><h1>compteur</h1>
+          <p>score: <span id="score"></span></p>
+        </div>
+        <div>
+          <button type="button" class="btn btn-info" id="clicker">Clicker</button>
+        </div>
+        <div>
+          Timer
+        </div>
+      </section>
+      <section class="row w-25">
+        <h1>Bouttons</h1>
+        <button type="button" class="btn btn-primary m-2" id="btn-multi-2">*2</button>
+        <button type="button" class="btn btn-primary m-2" id="btn-multi-4">*4</button>
+        <button type="button" class="btn btn-primary m-2" id="btn-auto">auto-click</button>
+        <button type="button" class="btn btn-primary m-2" id="btn-bonus">bonus</button>
+        <button type="button" class="btn btn-danger m-2" id btn-rest>reset</button>
+      </section>
+      
+    </section>
+    <section class="col">
+      <h3>Chat box</h3>
+      <textarea></textarea>
+    </section>
   </body>
 </html>
