@@ -23,7 +23,6 @@ btnAuto.addEventListener("click", () => {
    timer // fonction qui déclenche le timer de 30s
 
    let clickPerSecond = setInterval(() => {  // A chaque seconde le count s'incrémente de 1 pendant 30s 
-
       increment()
    }, 1000);
 
@@ -33,7 +32,6 @@ btnAuto.addEventListener("click", () => {
       }
    }
 
- 
 });
 
 
