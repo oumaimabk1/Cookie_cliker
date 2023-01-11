@@ -7,6 +7,7 @@ const score = document.getElementById('score')
 const btnBonus = document.getElementById('btn-bonus')
 const timer = document.getElementById('timer')
 const btnAuto = document.getElementById("btn-auto");
+const btnReset = document.getElementById("btn-reset" );
 
 
 let count = 0;
@@ -24,15 +25,15 @@ buttonClicker.addEventListener("click", () => {
   increment();
 });
 
-//boutton Bonus
+//boutton Bonus // test ok 
 
-btnBonus.addEventListener("click", () => {
+btnBonus.addEventListener("click", () => {  
   let i = 30;
 
   setInterval(() => {
     if(i>= 0){
         timer.innerText = i;
-        muliplicateur = 200;
+        muliplicateur = 200;              
     }else{
         timer.innerText = "Time out!";
         muliplicateur = 1;
@@ -45,26 +46,30 @@ btnBonus.addEventListener("click", () => {
 
 
 
-// boutton auto-click
+// boutton auto-click // test ok 
+// mais à améliorer car il fait rien de spécial 
+// il faut l'incrémenter de 50 ou 100 et faire en sorte qu'il foctionne en meme temps que le clicker !!
 
 btnAuto.addEventListener("click", () => {
-
-   timer // fonction qui déclenche le timer de 30s
+   let i = 30; 
 
    let clickPerSecond = setInterval(() => {  // A chaque seconde le count s'incrémente de 1 pendant 30s 
-
-      increment()
+      increment();
+      timer.innerText = i;
+      i--;
    }, 1000);
 
-   if (timer === 0) {                     // apres 30s le compteur arrete de s'incrémenter
-      function finish30s() {
-         clearInterval(clickPerSecond);  
-      }
-   }
+   setTimeout(() => {                        // apres 30s le compteur arrete de s'incrémenter
+      clearInterval(clickPerSecond);
+      timer.innerText = "Time out!";
+   }, 30000);
 
- 
 });
 
 
+// boutton reset // rest ok 
 
+btnReset.addEventListener("click", () =>{
+   location.reload();
+});
 
