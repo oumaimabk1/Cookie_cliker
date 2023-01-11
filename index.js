@@ -1,4 +1,3 @@
-
 import * as bootstrap from "bootstrap";
 
 //Déclarations des variables 
