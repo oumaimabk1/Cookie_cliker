@@ -1,4 +1,6 @@
-import * as bootstrap from 'bootstrap'
+
+import * as bootstrap from "bootstrap";
+
 //Déclarations des variables 
 const buttonClicker = document.getElementById('clicker')
 const score = document.getElementById('score')
@@ -6,15 +8,42 @@ const btnBonus = document.getElementById('btn-bonus')
 const timer = document.getElementById('timer')
 const btnAuto = document.getElementById("btn-auto");
 
-let count = 0;
 
-const increment =()=>{
-   count ++;
-   score.innerText=count;
-}
-buttonClicker.addEventListener('click',()=>{
-    increment()
+let count = 0;
+let muliplicateur = 1;
+
+const increment = () => {
+    count += muliplicateur;
+    score.innerText = count;
+};
+
+
+//boutton clicker
+
+buttonClicker.addEventListener("click", () => {
+  increment();
 });
+
+//boutton Bonus
+
+btnBonus.addEventListener("click", () => {
+  let i = 30;
+
+  setInterval(() => {
+    if(i>= 0){
+        timer.innerText = i;
+        muliplicateur = 200;
+    }else{
+        timer.innerText = "Time out!";
+        muliplicateur = 1;
+    }
+   
+    i--;
+  }, 1000);
+
+});
+
+
 
 // boutton auto-click
 
@@ -35,6 +64,7 @@ btnAuto.addEventListener("click", () => {
 
  
 });
+
 
 
 
