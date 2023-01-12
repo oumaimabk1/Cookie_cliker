@@ -7,9 +7,10 @@ const btnStart = document.getElementById("start-game");
 
 //header
 const currentPlayer = document.getElementById("player");
+//page 1
+let palyer = window.localStorage.getItem("player");
 
-
-oDomElement.style.backgroundImage = "url(/images/exemple/grille150.gif), url(/images/exemple/filter-image.jpg)";
+//oDomElement.style.backgroundImage = "url(/images/exemple/grille150.gif), url(/images/exemple/filter-image.jpg)";
 
 //afficher une page d'authentification
 function setVisible(selector, visible) {
@@ -66,8 +67,7 @@ btnMulti4.textContent = "Multi*4 ----" + costMulti4
 btnAuto.textContent = "AutoClick ----" + costAutoClick
 btnBonus.textContent = "Bonus ----" + costBonus
 
-//page 2
-let palyer = window.localStorage.getItem("player");
+
 
 //fonction incrémentation 
 let score = 0;
