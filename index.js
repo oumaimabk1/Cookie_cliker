@@ -57,6 +57,7 @@ btnStart.addEventListener("click", () => {
   currentPlayer.innerText = "Player :" + name;
   setVisible("#page2", true);
   document.querySelector('#page1').classList.add('d-none');
+  document.querySelector('#page1').classList.remove('d-flex');
 
 });
 
