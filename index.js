@@ -25,58 +25,16 @@ buttonClicker.addEventListener("click", () => {
   increment();
 });
 
-/*
-//boutton Bonus // test ok 
 
-btnBonus.addEventListener("click", () => {  
-  let i = 30;
 
-  setInterval(() => {
-    if(i>= 0){
-        timer.innerText = i;
-        muliplicateur = 200;              
-    }else{
-        timer.innerText = "Time out!";
-        muliplicateur = 1;
-    }
-   
-    i--;
-  }, 1000);
-
-});
-
-*/
 
 /*
-// boutton auto-click // test ok 
-// mais à améliorer car il fait rien de spécial 
-// il faut l'incrémenter de 50 ou 100 et faire en sorte qu'il foctionne en meme temps que le clicker !!
-
-btnAuto.addEventListener("click", () => {
-   let i = 30; 
-
-   let clickPerSecond = setInterval(() => {  // A chaque seconde le score s'incrémente de 1 pendant 30s 
-      increment();
-      timer.innerText = i;
-      i--;
-   }, 1000);
-
-   setTimeout(() => {                        // apres 30s le compteur arrete de s'incrémenter
-      clearInterval(clickPerSecond);
-      timer.innerText = "Time out!";
-   }, 30000);
-
-});
-
-
-
-*/
 btnAuto.addEventListener("click", () => {
    setInterval(function(){                   //incrémente le score de 10  toute les 5 secondes
       score+=10;
       viewScore.textContent = score;
   }, 5000);                            
-});
+});*/
 
 
 // boutton reset // rest ok 
@@ -102,4 +60,3 @@ btnBonus.addEventListener("click", () => {  //le boutton bonus doit accorder un 
      i--;
    }, 30000);
  });
-
