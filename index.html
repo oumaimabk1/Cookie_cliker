@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cookie Clicker</title>
     <link rel="stylesheet" href="style.scss">
+    <link rel="stylesheet" href="./main.css"
+    >
   </head>
 
   <body>
-    <header class="container py-4 px-3 mx-auto">
+    <header class="container py-4 px-3 mx-auto my-3">
       <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Cookie clicker</a>
@@ -25,7 +27,7 @@
       </ul>
     </header>
 
-    <section class="d-flex justify-content-around">
+    <section class="d-flex justify-content-around my-3">
     <section >
         <h1>message</h1>
     </section>
@@ -42,18 +44,20 @@
       </div>
     </section>
 
-    <section class="row w-25">
-        <button type="button" class="btn btn-primary m-2" id="btn-multi-2">*2</button>
-        <button type="button" class="btn btn-primary m-2" id="btn-multi-4">*4</button>
-        <button type="button" class="btn btn-primary m-2" id="btn-auto">auto-click</button>
-        <button type="button" class="btn btn-primary m-2" id="btn-bonus">bonus</button>
-        <button type="button" class="btn btn-danger m-2" id="btn-reset" >reset</button>
+    <section class="row w-25 m-2">
+        <button type="button" class="btn btn-primary m-2 btn-space" id="btn-multi-2">*2</button>
+        <button type="button" class="btn btn-primary m-2 btn-space" id="btn-multi-4">*4</button>
+        <button type="button" class="btn btn-primary m-2 btn-space" id="btn-auto">auto-click</button>
+        <button type="button" class="btn btn-primary m-2 btn-space" id="btn-bonus">bonus</button>
+        <button type="button" class="btn btn-danger m-2 btn-space" id="btn-reset" >reset</button>
     </section>
   </section>
-    <section class="col">
+  <footer>
+    <section class="col my-1npm mx-4">
       <h3>Chat box</h3>
       <textarea></textarea>
     </section>
+  </footer>
     
     <script type="module" src="index.js"></script>
   </body>

@@ -1,0 +1,9 @@
+body {
+    font-size: "Times New Roman";
+    Color: white;
+    background: url('./images/fond.png') ;
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    }

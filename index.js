@@ -20,17 +20,16 @@ const increment = () => {
 };
 
 btnMulti2.addEventListener("click", () => {
-    alert('hello')
+ 
   console.log("tets");
   muliplicateur = 2;
-  increment();
+ 
 });
 
 btnMulti4.addEventListener("click", () => {
   console.log("tets");
   muliplicateur = 4;
-  score += 4;
-  viewScore.innerText = score;
+  
   //increment();
 });
 
@@ -77,3 +76,4 @@ buttonClicker.addEventListener("click", () => {
     increment();
   }
 });
+oDomElement.style.backgroundImage = "url(/images/exemple/grille150.gif), url(/images/exemple/filter-image.jpg)";
