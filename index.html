@@ -4,6 +4,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cookie Clicker</title>
+
+    <link rel="stylesheet" href="style.scss">
+    <link rel="stylesheet" href="./main.css"
+    >
+  </head>
+
+  <body>
+    <header class="container py-4 px-3 mx-auto my-3">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Cookie clicker</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Player :</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Hight score</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Help</a>
+        </li>
+      </ul>
+    </header>
+
+    <section class="d-flex justify-content-around my-3">
+    <section >
+        <h1>message</h1>
+    </section>
+
     <link rel="stylesheet" href="style.scss" />
   </head>
 
@@ -32,6 +61,7 @@
         <section>
           <h1>message</h1>
         </section>
+
 
         <section>
           <div>
@@ -95,7 +125,40 @@
       <button type="button" class="btn btn-info m-5" disabled id="start-game">Start Game</button>
     </div>
 
-    
+
+    <section class="row w-25 m-2">
+        <button type="button" class="btn btn-primary m-2 btn-space" id="btn-multi-2">*2</button>
+        <button type="button" class="btn btn-primary m-2 btn-space" id="btn-multi-4">*4</button>
+        <button type="button" class="btn btn-primary m-2 btn-space" id="btn-auto">auto-click</button>
+        <button type="button" class="btn btn-primary m-2 btn-space" id="btn-bonus">bonus</button>
+        <button type="button" class="btn btn-danger m-2 btn-space" id="btn-reset" >reset</button>
+    </section>
+  </section>
+  <footer>
+    <section class="col my-1npm mx-4">
+      <h3>Chat box</h3>
+      <textarea></textarea>
+    </section>
+  </footer>
+<!--page authentification-->
+<div
+   
+class="input-group mb-3 d-flex flex-column justify-content-center align-items-center"
+id="page1"
+style="height: 100vh;"
+>
+<h1 class="m-5">Cookie clicker</h1>
+<br />
+
+<input
+id="username"
+  type="text"
+  placeholder="Username"
+  aria-label="Username"
+  aria-describedby="basic-addon1"
+/>
+<button type="button" class="btn btn-info m-5" disabled id="start-game">Start Game</button>
+</div>
     <script type="module" src="index.js"></script>
   </body>
 </html>

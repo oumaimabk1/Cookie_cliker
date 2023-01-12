@@ -28,8 +28,10 @@ let score = 0;
 let muliplicateur = 1;
 let palyer = window.localStorage.getItem("player");
 
-//afficher une page d'authentification
 
+oDomElement.style.backgroundImage = "url(/images/exemple/grille150.gif), url(/images/exemple/filter-image.jpg)";
+
+//afficher une page d'authentification
 function setVisible(selector, visible) {
   document.querySelector(selector).style.display = visible ? "block" : "none";
 }
@@ -67,6 +69,8 @@ const increment = () => {
   viewScore.innerText = score;
 };
 
+
+let startBonus;
 //boutton clicker
 buttonClicker.addEventListener("click", () => {
   console.log(startBonus);
@@ -82,7 +86,6 @@ buttonClicker.addEventListener("click", () => {
     increment();
   }
 });
-
 //fonction multi*2
 function multi2() {
   muliplicateur = 2;
@@ -153,7 +156,7 @@ btnAuto.addEventListener("click", () => {
 });
 
 //fonction bonus
-let startBonus;
+
 function bonus() {
    startBonus = 5;
   setInterval(() => {
@@ -186,7 +189,6 @@ btnBonus.addEventListener("click", () => {
 btnReset.addEventListener("click", () => {
   location.reload();
 });
-
 
 
 
