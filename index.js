@@ -1,3 +1,4 @@
+
 import * as bootstrap from "bootstrap";
 
 //Déclarations des variables 
@@ -6,6 +7,9 @@ const score = document.getElementById('score')
 const btnBonus = document.getElementById('btn-bonus')
 const timer = document.getElementById('timer')
 const btnAuto = document.getElementById("btn-auto");
+const btnMulti2 = document.getElementById("btn-multi-2");
+const btnMulti4 = document.getElementById("btn-multi-4");
+
 
 
 let count = 0;
@@ -41,8 +45,18 @@ btnBonus.addEventListener("click", () => {
   }, 1000);
 
 });
+btnMulti2.addEventListener("click", () => {
+    count += muliplicateur;
+    buttonClicker.innerText = count;
+        muliplicateur = 2;
 
+ });
+ btnMulti4.addEventListener("click", () => {
+    count += muliplicateur;
+    buttonClicker.innerText = count;
+        muliplicateur = 4;
 
+ });
 
 // boutton auto-click
 
