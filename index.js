@@ -7,7 +7,13 @@ const viewScore = document.getElementById("viewScore")
 const btnBonus = document.getElementById('btn-bonus')
 const timer = document.getElementById('timer')         //le joueur devrait voir une minuterie avec le temps restant à l'intérieur du bouton bonus.
 const btnAuto = document.getElementById("btn-auto");
+
+const btnMulti2 = document.getElementById("btn-multi-2");
+const btnMulti4 = document.getElementById("btn-multi-4");
+
+
 const btnReset = document.getElementById("btn-reset" );
+
 
 
 let score = 0;
@@ -44,6 +50,21 @@ btnBonus.addEventListener("click", () => {
   }, 1000);
 
 });
+btnMulti2.addEventListener("click", () => {
+    count += muliplicateur;
+    buttonClicker.innerText = count;
+        muliplicateur = 2;
+
+
+ });
+ btnMulti4.addEventListener("click", () => {
+    count += muliplicateur;
+    buttonClicker.innerText = count;
+        muliplicateur = 4;
+
+ });
+
+// boutton auto-click
 
 */
 
@@ -51,6 +72,7 @@ btnBonus.addEventListener("click", () => {
 // boutton auto-click // test ok 
 // mais à améliorer car il fait rien de spécial 
 // il faut l'incrémenter de 50 ou 100 et faire en sorte qu'il foctionne en meme temps que le clicker !!
+
 
 btnAuto.addEventListener("click", () => {
    let i = 30; 
