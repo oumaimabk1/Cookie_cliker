@@ -3,21 +3,25 @@ import * as bootstrap from "bootstrap";
 
 //Déclarations des variables 
 const buttonClicker = document.getElementById('clicker')
-const score = document.getElementById('score')
+const viewScore = document.getElementById("viewScore")
 const btnBonus = document.getElementById('btn-bonus')
-const timer = document.getElementById('timer')
+const timer = document.getElementById('timer')         //le joueur devrait voir une minuterie avec le temps restant à l'intérieur du bouton bonus.
 const btnAuto = document.getElementById("btn-auto");
+
 const btnMulti2 = document.getElementById("btn-multi-2");
 const btnMulti4 = document.getElementById("btn-multi-4");
 
 
+const btnReset = document.getElementById("btn-reset" );
 
-let count = 0;
+
+
+let score = 0;
 let muliplicateur = 1;
 
 const increment = () => {
-    count += muliplicateur;
-    score.innerText = count;
+   score += muliplicateur;
+    viewScore.innerText = score;
 };
 
 
@@ -27,15 +31,16 @@ buttonClicker.addEventListener("click", () => {
   increment();
 });
 
-//boutton Bonus
+/*
+//boutton Bonus // test ok 
 
-btnBonus.addEventListener("click", () => {
+btnBonus.addEventListener("click", () => {  
   let i = 30;
 
   setInterval(() => {
     if(i>= 0){
         timer.innerText = i;
-        muliplicateur = 200;
+        muliplicateur = 200;              
     }else{
         timer.innerText = "Time out!";
         muliplicateur = 1;
@@ -50,6 +55,7 @@ btnMulti2.addEventListener("click", () => {
     buttonClicker.innerText = count;
         muliplicateur = 2;
 
+
  });
  btnMulti4.addEventListener("click", () => {
     count += muliplicateur;
@@ -60,24 +66,62 @@ btnMulti2.addEventListener("click", () => {
 
 // boutton auto-click
 
+*/
+
+/*
+// boutton auto-click // test ok 
+// mais à améliorer car il fait rien de spécial 
+// il faut l'incrémenter de 50 ou 100 et faire en sorte qu'il foctionne en meme temps que le clicker !!
+
+
 btnAuto.addEventListener("click", () => {
+   let i = 30; 
 
-   timer // fonction qui déclenche le timer de 30s
-
-   let clickPerSecond = setInterval(() => {  // A chaque seconde le count s'incrémente de 1 pendant 30s 
-
-      increment()
+   let clickPerSecond = setInterval(() => {  // A chaque seconde le score s'incrémente de 1 pendant 30s 
+      increment();
+      timer.innerText = i;
+      i--;
    }, 1000);
 
-   if (timer === 0) {                     // apres 30s le compteur arrete de s'incrémenter
-      function finish30s() {
-         clearInterval(clickPerSecond);  
-      }
-   }
+   setTimeout(() => {                        // apres 30s le compteur arrete de s'incrémenter
+      clearInterval(clickPerSecond);
+      timer.innerText = "Time out!";
+   }, 30000);
 
- 
 });
 
 
 
+*/
+btnAuto.addEventListener("click", () => {
+   setInterval(function(){                   //incrémente le score de 10  toute les 5 secondes
+      score+=10;
+      viewScore.textContent = score;
+  }, 5000);                            
+});
+
+
+// boutton reset // rest ok 
+
+btnReset.addEventListener("click", () =>{
+   location.reload();
+});
+
+
+
+
+btnBonus.addEventListener("click", () => {  //le boutton bonus doit accorder un boost de score de 200%
+   let i = 30;
+ 
+   setInterval(() => {
+     if(i>= 0){
+         timer.innerText = i;             //le joueur devrait voir une minuterie avec le temps restant à l'intérieur du bouton bonus.
+         score *= 2;                      //  le score sera multiplié par 2 chaque 30 secondes  
+         viewScore.innerText = score;            
+     }else{
+         timer.innerText = "Time out!"; 
+     }
+     i--;
+   }, 30000);
+ });
 
