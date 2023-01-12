@@ -12,7 +12,6 @@ const btnReset = document.getElementById("btn-reset");
 const viewScore = document.getElementById("viewScore");
 const timer = document.getElementById("timer"); //le joueur devrait voir une minuterie avec le temps restant à l'intérieur du bouton bonus.
 
-
 // le prix des options
 let costMulti2 = 5;
 let costMulti4 = 8;
@@ -66,13 +65,10 @@ btnMulti2.addEventListener("click", () => {
   buyMulti2();
 });
 
-
-
 //fonction multi*4
 function multi4() {
   muliplicateur = 4;
   viewScore.innerText = score;
- 
 }
 
 // fonction pour achat multi4
@@ -115,7 +111,6 @@ function buyAutoClick() {
 btnAuto.addEventListener("click", () => {
   buyAutoClick();
 });
-
 
 //fonction bonus
 let startBonus;
