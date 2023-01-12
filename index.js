@@ -1,32 +1,12 @@
 import * as bootstrap from "bootstrap";
 
-// les bouttons 
-const buttonClicker = document.getElementById("clicker");
-const btnMulti2 = document.getElementById("btn-multi-2");
-const btnMulti4 = document.getElementById("btn-multi-4");
-const btnAuto = document.getElementById("btn-auto");
-const btnBonus = document.getElementById("btn-bonus");
-const btnReset = document.getElementById("btn-reset");
 //input username
 const userInput = document.getElementById("username");
 const btnStart = document.getElementById("start-game");
+
+
 //header
 const currentPlayer = document.getElementById("player");
-
-// les variables
-const viewScore = document.getElementById("viewScore");
-const timer = document.getElementById("timer"); //le joueur devrait voir une minuterie avec le temps restant à l'intérieur du bouton bonus.
-
-// le prix des options
-let costMulti2 = 5;
-let costMulti4 = 8;
-let costAutoClick = 10;
-let costBonus = 12;
-
-//fonction incrémentation 
-let score = 0;
-let muliplicateur = 1;
-let palyer = window.localStorage.getItem("player");
 
 
 oDomElement.style.backgroundImage = "url(/images/exemple/grille150.gif), url(/images/exemple/filter-image.jpg)";
@@ -35,7 +15,6 @@ oDomElement.style.backgroundImage = "url(/images/exemple/grille150.gif), url(/im
 function setVisible(selector, visible) {
   document.querySelector(selector).style.display = visible ? "block" : "none";
 }
-
 
   if (palyer) {
     setVisible("#page2", true);
@@ -63,7 +42,37 @@ btnStart.addEventListener("click", () => {
 
 });
 
+// les bouttons 
+const buttonClicker = document.getElementById("clicker");
+const btnMulti2 = document.getElementById("btn-multi-2");
+const btnMulti4 = document.getElementById("btn-multi-4");
+const btnAuto = document.getElementById("btn-auto");
+const btnBonus = document.getElementById("btn-bonus");
+const btnReset = document.getElementById("btn-reset");
+
+// les variables
+const viewScore = document.getElementById("viewScore");
+const timer = document.getElementById("timer"); //le joueur devrait voir une minuterie avec le temps restant à l'intérieur du bouton bonus.
+
+// le prix des options
+let costMulti2 = 5;
+let costMulti4 = 8;
+let costAutoClick = 10;
+let costBonus = 12;
+
+// affichage des prix
+btnMulti2.textContent = "Multi*2 ----" + costMulti2
+btnMulti4.textContent = "Multi*4 ----" + costMulti4
+btnAuto.textContent = "AutoClick ----" + costAutoClick
+btnBonus.textContent = "Bonus ----" + costBonus
+
 //page 2
+let palyer = window.localStorage.getItem("player");
+
+//fonction incrémentation 
+let score = 0;
+let muliplicateur = 1;
+
 const increment = () => {
   score += muliplicateur;
   viewScore.innerText = score;
