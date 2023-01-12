@@ -7,6 +7,11 @@ const btnMulti4 = document.getElementById("btn-multi-4");
 const btnAuto = document.getElementById("btn-auto");
 const btnBonus = document.getElementById("btn-bonus");
 const btnReset = document.getElementById("btn-reset");
+//input username
+const userInput = document.getElementById("username");
+const btnStart = document.getElementById("start-game");
+//header
+const currentPlayer = document.getElementById("player");
 
 // les variables
 const viewScore = document.getElementById("viewScore");
@@ -27,7 +32,41 @@ btnBonus.textContent = "Bonus ----" + costBonus
 //fonction incrémentation 
 let score = 0;
 let muliplicateur = 1;
+let palyer = window.localStorage.getItem("player");
 
+//afficher une page d'authentification
+
+function setVisible(selector, visible) {
+  document.querySelector(selector).style.display = visible ? "block" : "none";
+}
+
+
+  if (palyer) {
+    setVisible("#page2", true);
+    setVisible("#page1", false);
+  } else {
+    setVisible("#page2", false);
+    setVisible("#page1", true);
+  }
+
+let name;
+userInput.addEventListener("change", (e) => {
+  name = e.target.value;
+
+  if (name.length > 4) {
+    btnStart.disabled = false;
+  }
+});
+
+btnStart.addEventListener("click", () => {
+  window.localStorage.setItem("player", name);
+  currentPlayer.innerText = "Player :" + name;
+  setVisible("#page2", true);
+  document.querySelector('#page1').classList.add('d-none');
+
+});
+
+//page 2
 const increment = () => {
   score += muliplicateur;
   viewScore.innerText = score;
