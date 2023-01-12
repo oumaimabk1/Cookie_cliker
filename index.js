@@ -18,6 +18,12 @@ let costMulti4 = 8;
 let costAutoClick = 10;
 let costBonus = 12;
 
+// affichage des prix
+btnMulti2.textContent = "Multi*2 ----" + costMulti2
+btnMulti4.textContent = "Multi*4 ----" + costMulti4
+btnAuto.textContent = "AutoClick ----" + costAutoClick
+btnBonus.textContent = "Bonus ----" + costBonus
+
 //fonction incrémentation 
 let score = 0;
 let muliplicateur = 1;
