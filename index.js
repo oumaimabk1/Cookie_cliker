@@ -10,28 +10,62 @@ const btnAuto = document.getElementById("btn-auto");
 const btnMulti2 = document.getElementById("btn-multi-2");
 const btnMulti4 = document.getElementById("btn-multi-4");
 const btnReset = document.getElementById("btn-reset");
+//input username
+const userInput = document.getElementById("username");
+const btnStart = document.getElementById("start-game");
+//header
+const currentPlayer = document.getElementById("player");
 
 let score = 0;
 let muliplicateur = 1;
+let palyer = window.localStorage.getItem("player");
 
+//afficher une page d'authentification
+
+function setVisible(selector, visible) {
+  document.querySelector(selector).style.display = visible ? "block" : "none";
+}
+
+
+  if (palyer) {
+    setVisible("#page2", true);
+    setVisible("#page1", false);
+  } else {
+    setVisible("#page2", false);
+    setVisible("#page1", true);
+  }
+
+let name;
+userInput.addEventListener("change", (e) => {
+  name = e.target.value;
+
+  if (name.length > 4) {
+    btnStart.disabled = false;
+  }
+});
+
+btnStart.addEventListener("click", () => {
+  window.localStorage.setItem("player", name);
+  currentPlayer.innerText = "Player :" + name;
+  setVisible("#page2", true);
+  document.querySelector('#page1').classList.add('d-none');
+
+});
+
+//page 2
 const increment = () => {
   score += muliplicateur;
   viewScore.innerText = score;
 };
 
 btnMulti2.addEventListener("click", () => {
-    alert('hello')
-  console.log("tets");
   muliplicateur = 2;
-  increment();
+  //prix va etre récupérer du html
+  //augmenter le prix
 });
 
 btnMulti4.addEventListener("click", () => {
-  console.log("tets");
   muliplicateur = 4;
-  score += 4;
-  viewScore.innerText = score;
-  //increment();
 });
 
 btnAuto.addEventListener("click", () => {
@@ -40,12 +74,6 @@ btnAuto.addEventListener("click", () => {
     score += 10;
     viewScore.textContent = score;
   }, 5000);
-});
-
-// boutton reset // rest ok
-
-btnReset.addEventListener("click", () => {
-  location.reload();
 });
 
 let startBonus;
@@ -60,6 +88,11 @@ btnBonus.addEventListener("click", () => {
     }
     startBonus >= 0 ? startBonus-- : startBonus;
   }, 1000);
+});
+// boutton reset // rest ok
+
+btnReset.addEventListener("click", () => {
+  location.reload();
 });
 
 //boutton clicker
