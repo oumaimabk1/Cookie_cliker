@@ -8,8 +8,10 @@ const btnStart = document.getElementById("start-game");
 //header
 const currentPlayer = document.getElementById("player");
 
-//afficher une page d'authentification
 
+oDomElement.style.backgroundImage = "url(/images/exemple/grille150.gif), url(/images/exemple/filter-image.jpg)";
+
+//afficher une page d'authentification
 function setVisible(selector, visible) {
   document.querySelector(selector).style.display = visible ? "block" : "none";
 }
@@ -36,6 +38,7 @@ btnStart.addEventListener("click", () => {
   currentPlayer.innerText = "Player :" + name;
   setVisible("#page2", true);
   document.querySelector('#page1').classList.add('d-none');
+  document.querySelector('#page1').classList.remove('d-flex');
 
 });
 
@@ -75,6 +78,8 @@ const increment = () => {
   viewScore.innerText = score;
 };
 
+
+let startBonus;
 //boutton clicker
 buttonClicker.addEventListener("click", () => {
   console.log(startBonus);
@@ -90,7 +95,6 @@ buttonClicker.addEventListener("click", () => {
     increment();
   }
 });
-
 //fonction multi*2
 function multi2() {
   muliplicateur = 2;
@@ -161,7 +165,7 @@ btnAuto.addEventListener("click", () => {
 });
 
 //fonction bonus
-let startBonus;
+
 function bonus() {
    startBonus = 5;
   setInterval(() => {
@@ -194,7 +198,6 @@ btnBonus.addEventListener("click", () => {
 btnReset.addEventListener("click", () => {
   location.reload();
 });
-
 
 
 
