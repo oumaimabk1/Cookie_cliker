@@ -187,9 +187,9 @@ function bonus() {
    startBonus = 5;
   setInterval(() => {
     if (startBonus >= 0) {
-      timer.innerText = startBonus;
+      btnBonus.textContent = "Bonus-- " + costBonus + " Timer: " + startBonus;
     } else {
-      timer.innerText = "Time out!";
+      btnBonus.textContent = "Bonus-- " + costBonus;
     }
     startBonus >= 0 ? startBonus-- : startBonus;
   }, 1000);
@@ -204,11 +204,9 @@ function buyBonus() {
      bonus()
      costBonus *= 4; 
      alert("Option activée. Le nouveau prix est de: " + costBonus);
-     btnBonus.textContent = "Bonus ----" + costBonus
-    // btnBonus.disabled = false;
+     btnBonus.textContent = "Bonus-- " + costBonus;
   } else {
-     alert("Vous n'avez pas assez de points!");
-    // btnBonus.disabled = true;
+     alert("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé
   }
 }
 
@@ -221,7 +219,3 @@ btnBonus.addEventListener("click", () => {
 btnReset.addEventListener("click", () => {
   location.reload();
 });
-
-
-
-
