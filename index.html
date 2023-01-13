@@ -7,6 +7,9 @@
 
     <link rel="stylesheet" href="style.scss" />
     <link rel="stylesheet" href="./main.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   </head>
 
   <body>
@@ -14,7 +17,7 @@
       <header class="container py-4 px-3 mx-auto">
         <ul class="nav nav-pills nav-fill">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"
+            <a class="nav-link  " aria-current="page" href="#"
               >Cookie clicker</a
             >
           </li>
@@ -29,78 +32,54 @@
           </li>
         </ul>
       </header>
-
-      <section class="d-flex justify-content-around">
-        <section>
-          <h1>message</h1>
-        </section>
-
-        <section>
+    <div class="container d-flex justify-content-center my-3">
+      <div class="row justify-content-center">
+        <div>
           <div>
-            <p>score: <span id="viewScore"></span></p>
+            <p class="score fs-2  m-2 text-warning">score: <span id="viewScore"></span></p>
           </div>
           <div>
-            <button type="button" class="btn btn-info" id="clicker">
-              Clicker
+            <button type="button" class="btn btn-info " id="clicker">
+            
             </button>
           </div>
-          <div>
-            Timer : <span id="timer"></span>
-            <!-- doit etre dans bonus-->
-          </div>
-        </section>
+          
 
-        <section class="row w-25">
-          <button
+      </div>
+
+        <div class="wrapper justify-content-center">
+          <span> <button
             type="button"
-            class="btn btn-primary m-2"
-            id="btn-multi-2"
-            valeur="200"
+            class=" btn btn-info text-info m-2 ms-3 w-25 h-50" id="btn-multi-2" valeur="200"
           >
             *2
-          </button>
-          <button type="button" class="btn btn-primary m-2" id="btn-multi-4">
+          </button></span>
+          <span> <button type="button" class=" btn btn-success text-success ms-3 w-50 h-50" id="btn-multi-4">
             *4
-          </button>
-          <button type="button" class="btn btn-primary m-2" id="btn-auto">
+          </button></span>
+          <span> <button type="button" class="  btn btn-warning text-warning m-2 ms-3 w-50 h-50" id="btn-auto">
             auto-click
-          </button>
-          <button type="button" class="btn btn-primary m-2" id="btn-bonus">
-            bonus
-          </button>
-          <button type="button" class="btn btn-danger m-2" id="btn-reset">
+          </button></span>
+          <span>
+            <button type="button" class="  btn btn-primary text-primary m-2 ms-3 w-25 h-50" id="btn-bonus">
+              bonus
+            </button></span>
+          <span> <button type="button" class=" btn btn-danger text-danger m-2 ms-3 w-25" id="btn-reset">
             reset
-          </button>
-        </section>
-      </section>
-      <footer>
-        <section class="col my-1npm mx-4">
-          <h3>Chat box</h3>
-          <textarea></textarea>
-        </section>
-      </footer>
+          </button></span>
+        </div>
+      </div>
+     
     </div>
+    <footer class="row fixed-bottom">
+      
+        <div class="notifications">
+          <h1>message</h1>
+        </div>
+    
+    </footer>
 
-    <!--page authentification-->
-    <div
-      class="input-group mb-3 d-flex flex-column justify-content-center align-items-center"
-      id="page1"
-      style="height: 100vh"
-    >
-      <h1 class="m-5">Cookie clicker</h1>
-      <br />
-
-      <input
-        id="username"
-        type="text"
-        placeholder="Username"
-        aria-label="Username"
-        aria-describedby="basic-addon1"
-      />
-      <button type="button" class="btn btn-info m-5" disabled id="start-game">
-        Start Game
-      </button>
-    </div>
-    <script type="module" src="index.js"></script>
+    
+    <script type="module" src="./design.js"></script>
   </body>
 </html>

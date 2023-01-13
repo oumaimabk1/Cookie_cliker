@@ -1,47 +1,4 @@
-import * as bootstrap from "bootstrap";
 
-//input username
-const userInput = document.getElementById("username");
-const btnStart = document.getElementById("start-game");
-
-
-//header
-const currentPlayer = document.getElementById("player");
-//page 1
-let palyer = window.localStorage.getItem("player");
-
-//oDomElement.style.backgroundImage = "url(/images/exemple/grille150.gif), url(/images/exemple/filter-image.jpg)";
-
-//afficher une page d'authentification
-function setVisible(selector, visible) {
-  document.querySelector(selector).style.display = visible ? "block" : "none";
-}
-
-  if (palyer) {
-    setVisible("#page2", true);
-    setVisible("#page1", false);
-  } else {
-    setVisible("#page2", false);
-    setVisible("#page1", true);
-  }
-
-let name;
-userInput.addEventListener("change", (e) => {
-  name = e.target.value;
-
-  if (name.length > 4) {
-    btnStart.disabled = false;
-  }
-});
-
-btnStart.addEventListener("click", () => {
-  window.localStorage.setItem("player", name);
-  currentPlayer.innerText = "Player :" + name;
-  setVisible("#page2", true);
-  document.querySelector('#page1').classList.add('d-none');
-  document.querySelector('#page1').classList.remove('d-flex');
-
-});
 
 // les bouttons 
 const buttonClicker = document.getElementById("clicker");

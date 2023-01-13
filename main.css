@@ -1,3 +1,4 @@
+
 body {
     font-size: "Times New Roman";
     Color: white;
@@ -7,3 +8,14 @@ body {
     background-position: center;
     background-attachment: fixed;
     }
+#clicker {
+    width: 320px;
+    height: 200px;
+    background: url('./images/play.svg');
+    border-style: none;
+
+ }
+.btn{
+    background: url('./images/game.png');
+    
+}
