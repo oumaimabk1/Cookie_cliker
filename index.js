@@ -55,6 +55,7 @@ const btnReset = document.getElementById("btn-reset");
 const viewScore = document.getElementById("viewScore");
 
 
+
 // le prix des options
 let costMulti2 = 5;
 let costMulti4 = 8;
@@ -74,10 +75,10 @@ function condition(btn,cost) {
 
 //fonction incrémentation 
 let score = 0;
-let muliplicateur = 1;
+let multiplier = 1;
 
 const increment = () => {
-  score += muliplicateur;
+  score += multiplier;
   viewScore.innerText = score;
   condition(btnMulti2,costMulti2);
   condition(btnMulti4,costMulti4);
@@ -105,8 +106,12 @@ buttonClicker.addEventListener("click", () => {
 
 //fonction multi*2
 function multi2() {
- muliplicateur = 2;
+  multiplier = 2;
  viewScore.innerText = score;
+ setTimeout(function() {
+  multiplier = 1;
+}, 10000);
+
 }
 
 // fonction pour achat multi2
@@ -119,21 +124,21 @@ function buyMulti2() {
      costMulti2 *= 2; // augmente le prix pour le prochain achat 
      alert("Option activée. Le nouveau prix est de: " + costMulti2);
      btnMulti2.textContent = "Multi*2 ----" + costMulti2
-     
-  } else {
-    alert("Vous n'avez pas assez de points!");
-  }
+  } 
 }
 
 //boutton multi2
 btnMulti2.addEventListener("click", () => {
-  buyMulti2();
+        buyMulti2();
 });
 
 //fonction multi*4
 function multi4() {
-  muliplicateur = 4;
+  multiplier = 4;
   viewScore.innerText = score;
+  setTimeout(function() {
+    multiplier = 1;
+  }, 15000);
 }
 
 // fonction pour achat multi4
