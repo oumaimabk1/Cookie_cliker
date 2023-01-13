@@ -53,7 +53,7 @@ const btnReset = document.getElementById("btn-reset");
 
 // les variables
 const viewScore = document.getElementById("viewScore");
-const timer = document.getElementById("timer"); //le joueur devrait voir une minuterie avec le temps restant à l'intérieur du bouton bonus.
+
 
 // le prix des options
 let costMulti2 = 5;
@@ -158,11 +158,15 @@ btnMulti4.addEventListener("click", () => {
 
 //fonction autoClick
 function autoClick() {
-  setInterval(function () {
-     //incrémente le score de 10  toute les 5 secondes
+  let autoClick = 
+  setInterval(() => {
+     //incrémente le score de 10  toute les 5 secondes pendant 10s
      score += 10;
      viewScore.textContent = score;
    }, 5000);
+   setTimeout(() => {
+    clearInterval(autoClick);
+  }, 10000);
 }
 
 // fonction pour achat autoClick
@@ -172,8 +176,9 @@ function buyAutoClick() {
      condition(btnAuto ,costAutoClick);
      viewScore.innerText = score; // update le score
      autoClick()
-  } else {
-     alert("Vous n'avez pas assez de points!");
+     costAutoClick *= 2; 
+     alert("Option activée. Le nouveau prix est de: " + costAutoClick);
+     btnAuto.textContent = "Auto-Click-- " + costAutoClick ;
   }
 }
 
