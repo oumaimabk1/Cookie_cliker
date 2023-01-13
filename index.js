@@ -67,7 +67,10 @@ btnMulti4.textContent = "Multi*4 ----" + costMulti4
 btnAuto.textContent = "AutoClick ----" + costAutoClick
 btnBonus.textContent = "Bonus ----" + costBonus
 
-
+//fonction condition d'achat d'option
+function condition(btn,cost) {
+  return btn.disabled = score >= cost ? false : true
+}
 
 //fonction incrémentation 
 let score = 0;
@@ -76,6 +79,10 @@ let muliplicateur = 1;
 const increment = () => {
   score += muliplicateur;
   viewScore.innerText = score;
+  condition(btnMulti2,costMulti2);
+  condition(btnMulti4,costMulti4);
+  condition(btnAuto ,costAutoClick);
+  condition(btnBonus ,costBonus);
 };
 
 
@@ -95,20 +102,26 @@ buttonClicker.addEventListener("click", () => {
     increment();
   }
 });
+
 //fonction multi*2
 function multi2() {
-  muliplicateur = 2;
-  viewScore.innerText = score;
+ muliplicateur = 2;
+ viewScore.innerText = score;
 }
 
 // fonction pour achat multi2
 function buyMulti2() {
   if (score >= costMulti2 ) {
-     score -= costMulti2;       
+     score -= costMulti2;  
+     condition(btnMulti2,costMulti2) 
      viewScore.innerText = score; 
-     multi2()
+     multi2();
+     costMulti2 *= 2; // augmente le prix pour le prochain achat 
+     alert("Option activée. Le nouveau prix est de: " + costMulti2);
+     btnMulti2.textContent = "Multi*2 ----" + costMulti2
+     
   } else {
-     alert("Vous n'avez pas assez de points!");
+    alert("Vous n'avez pas assez de points!");
   }
 }
 
@@ -126,9 +139,13 @@ function multi4() {
 // fonction pour achat multi4
 function buyMulti4() {
   if (score >= costMulti4 ) {
-     score -= costMulti4;       
+     score -= costMulti4; 
+     condition(btnMulti4,costMulti4);      
      viewScore.innerText = score; 
      multi4()
+     costMulti4 *= 3; 
+     alert("Option activée. Le nouveau prix est de: " + costMulti4);
+     btnMulti4.textContent = "Multi*4 ----" + costMulti4
   } else {
      alert("Vous n'avez pas assez de points!");
   }
@@ -152,6 +169,7 @@ function autoClick() {
 function buyAutoClick() {
   if (score >= costAutoClick ) {
      score -= costAutoClick;       // déduire le prix d'achat du score 
+     condition(btnAuto ,costAutoClick);
      viewScore.innerText = score; // update le score
      autoClick()
   } else {
@@ -165,7 +183,6 @@ btnAuto.addEventListener("click", () => {
 });
 
 //fonction bonus
-
 function bonus() {
    startBonus = 5;
   setInterval(() => {
@@ -181,11 +198,17 @@ function bonus() {
 // fonction pour achat bonus
 function buyBonus() {
   if (score >= costBonus ) {
-     score -= costBonus;       
+     score -= costBonus;    
+     condition(btnBonus ,costBonus);   
      viewScore.innerText = score; 
      bonus()
+     costBonus *= 4; 
+     alert("Option activée. Le nouveau prix est de: " + costBonus);
+     btnBonus.textContent = "Bonus ----" + costBonus
+    // btnBonus.disabled = false;
   } else {
      alert("Vous n'avez pas assez de points!");
+    // btnBonus.disabled = true;
   }
 }
 
