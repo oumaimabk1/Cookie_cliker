@@ -17,17 +17,15 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
-/* SAVE PRODUCT */
-
-router.post('/', function (req, res, next) {
-    Player.create(req.body, function (err, post) {
-        if (err) return next(err);
-        res.json(post);
-    });
+/*add multipicateur and score*/
+router.post('/:id', function (req, res, next) {
+Player.findOneAndUpdate({ _id: req.params.id }, { $set: { score: req.body.score, multiplicateur: req.body.multiplicateur } }, { new: true }, function(err, player) {
+    if (err) return handleError(err);
+    console.log(player);
+  });
 });
 
-
-/* UPDATE PRODUCT */
+/* UPDATE Player */
 
 router.put('/:id', function (req, res, next) {
     Player.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
@@ -37,7 +35,7 @@ router.put('/:id', function (req, res, next) {
 });
 
 
-/* DELETE PRODUCT */
+/* DELETE player */
 
 router.delete('/:id', function (req, res, next) {
     Player.findByIdAndRemove(req.params.id, req.body, function (err, post) {
