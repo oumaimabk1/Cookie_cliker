@@ -9,8 +9,8 @@ module.exports = {
 
         try {
             // check if account already exist
-            let user = await Player.findOne({email: req.body.email});
-            if(user) {
+            let user = await Player.findOne({ email: req.body.email });
+            if (user) {
                 return next(boom.badRequest('User already exist'));
             }
             //crypt("12345", 4) ---> "34567"
@@ -29,32 +29,36 @@ module.exports = {
                 id: user._id
             })
 
-        } catch(err) {
+        } catch (err) {
             return next(boom.internal(err.message));
         }
     },
 
     login: async (req, res, next) => {
         try {
-            let user = await Player.findOne({email: req.body.email});
-            if(!user) {
+            let user = await Player.findOne({ email: req.body.email });
+            if (!user) {
                 return next(boom.unauthorized("Invalid email or password"));
             }
             const validPassword = await bcrypt.compare(req.body.password, user.password);
-            if(!validPassword) {
+            if (!validPassword) {
                 return next(boom.unauthorized("Invalid email or password"));
             }
 
             // generate token
             const token = jwt.sign({
-               id: user._id,
-               username : user.username
-            }, config.get('jwtPrivateJey'),{expiresIn: '5min'});
+                id: user._id,
+                name: user.name
+            }, config.get('jwtPrivateJey'), { expiresIn: '5min' });
 
             res.json({
-                token: token
+                token: token,
+                user: {
+                    id: user._id,
+                    name: user.name
+                }
             })
-        } catch(err) {
+        } catch (err) {
             return res.status(500).json({
                 message: err.message
             })
@@ -67,7 +71,7 @@ module.exports = {
         try {
             const user = await Player.findById(req.user.id).select('-password');
             res.json(user);
-        } catch(err) {
+        } catch (err) {
             return next(boom.internal(err.message));
         }
     }

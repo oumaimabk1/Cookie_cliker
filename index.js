@@ -1,92 +1,93 @@
 import * as bootstrap from "bootstrap";
-
-//input username
-const userInput = document.getElementById("username");
-const btnStart = document.getElementById("start-game");
-
-
+import { getMultiplicateur,updatecurrentPlayer } from './Apicookies';
 //header
 const currentPlayer = document.getElementById("player");
+
 //page 1
-let palyer = window.localStorage.getItem("player");
-
-//oDomElement.style.backgroundImage = "url(/images/exemple/grille150.gif), url(/images/exemple/filter-image.jpg)";
-
-//afficher une page d'authentification
-function setVisible(selector, visible) {
-  document.querySelector(selector).style.display = visible ? "block" : "none";
-}
-
-  if (palyer) {
-    setVisible("#page2", true);
-    setVisible("#page1", false);
-  } else {
-    setVisible("#page2", false);
-    setVisible("#page1", true);
-  }
-
-let name;
-userInput.addEventListener("change", (e) => {
-  name = e.target.value;
-
-  if (name.length > 4) {
-    btnStart.disabled = false;
-  }
-});
-
-btnStart.addEventListener("click", () => {
-  window.localStorage.setItem("player", name);
-  currentPlayer.innerText = "Player :" + name;
-  setVisible("#page2", true);
-  document.querySelector('#page1').classList.add('d-none');
-  document.querySelector('#page1').classList.remove('d-flex');
-
-});
-
-// les bouttons 
-const buttonClicker = document.getElementById("clicker");
-const btnMulti2 = document.getElementById("btn-multi-2");
-const btnMulti4 = document.getElementById("btn-multi-4");
-const btnAuto = document.getElementById("btn-auto");
-const btnBonus = document.getElementById("btn-bonus");
-const btnReset = document.getElementById("btn-reset");
-
-// les variables
-const viewScore = document.getElementById("viewScore");
-
-
-
-// le prix des options
-let costMulti2 = 5;
-let costMulti4 = 8;
-let costAutoClick = 10;
-let costBonus = 12;
-
-// affichage des prix
-btnMulti2.textContent = "Multi*2 ----" + costMulti2
-btnMulti4.textContent = "Multi*4 ----" + costMulti4
-btnAuto.textContent = "AutoClick ----" + costAutoClick
-btnBonus.textContent = "Bonus ----" + costBonus
-
-//fonction condition d'achat d'option
-function condition(btn,cost) {
-  return btn.disabled = score >= cost ? false : true
-}
-
+let palyer = window.localStorage.getItem("user");
+console.log(updatecurrentPlayer())
 //fonction incrémentation 
 let score = 0;
 let multiplier = 1;
+let tabMultiplicator = [];
 
-const increment = () => {
-  score += multiplier;
-  viewScore.innerText = score;
-  condition(btnMulti2,costMulti2);
-  condition(btnMulti4,costMulti4);
-  condition(btnAuto ,costAutoClick);
-  condition(btnBonus ,costBonus);
-};
+//recuperer les multiplicateur du base de donnees et afficher les bouttons 
+const buttons = document.getElementById('buttons'); 
+const buttonClicker = document.getElementById("clicker");
+
+const getAllMultiplicateur = async () => {
+  let multipli = await getMultiplicateur()
+
+  buttons.innerHTML =
+    `
+ <button type="button" class="btn btn-primary m-2" id="btn-multi-2" disabled>
+   <div>
+   <p>*${multipli[0].multi} <span> cost ${multipli[0].cost}</span></p>
+   </div>
+ </button>
+ <button type="button" class="btn btn-primary m-2" id="btn-multi-4" disabled>
+ <div>
+ <p>*${multipli[1].multi} <span> cost ${multipli[1].cost}</span></p>
+ </div>
+  </button>
+  <button type="button" class="btn btn-primary m-2" id="btn-auto" disabled>
+     auto-click <span> cost ${multipli[2].cost}</span></p>
+  </button>
+  <button type="button" class="btn btn-primary m-2" id="btn-bonus" disabled>
+     <p> bonus    
+     <span> cost ${multipli[2].cost}</span></p>     
+  <span id="timer"></span></p>
+  </button>
+  <button type="button" class="btn btn-danger m-2" id="btn-reset">
+      reset
+  </button>
+  `
+  //declare buttons
+
+  const btnAuto = document.getElementById("btn-auto");
+  const btnBonus = document.getElementById("btn-bonus");
+  const btnReset = document.getElementById("btn-reset");
 
 
+  let allButtons = buttons.children;
+
+  for (let i = 0; i< 4 ; i ++) {
+    allButtons[i].disabled = score < multipli[i].cost
+    if(i<2){
+      allButtons[i].addEventListener('click', () => {
+        buyMulti(multipli[i].multi, multipli[i].cost)
+        //update score and cost
+      })
+    }
+   
+  }
+
+  //boutton autoClick
+  btnAuto.addEventListener("click", () => {
+    buyAutoClick(multipli[2].cost);
+    //update score and cost
+  });
+
+  //boutton bonus
+  btnBonus.addEventListener("click", () => {
+    buyBonus(multipli[3].cost);
+    //update score and cost
+  });
+
+  //boutton reset 
+  btnReset.addEventListener("click", () => {
+    location.reload();
+  });
+
+  return multipli
+}
+
+getAllMultiplicateur();
+
+//fonction condition d'achat d'option
+function condition(btn, cost) {
+  return btn.disabled = score < cost
+}
 let startBonus;
 //boutton clicker
 buttonClicker.addEventListener("click", () => {
@@ -104,128 +105,88 @@ buttonClicker.addEventListener("click", () => {
   }
 });
 
-//fonction multi*2
-function multi2() {
-  multiplier = 2;
- viewScore.innerText = score;
- setTimeout(function() {
-  multiplier = 1;
-}, 10000);
-
-}
-
-// fonction pour achat multi2
-function buyMulti2() {
-  if (score >= costMulti2 ) {
-     score -= costMulti2;  
-     condition(btnMulti2,costMulti2) 
-     viewScore.innerText = score; 
-     multi2();
-     costMulti2 *= 2; // augmente le prix pour le prochain achat 
-     alert("Option activée. Le nouveau prix est de: " + costMulti2);
-     btnMulti2.textContent = "Multi*2 ----" + costMulti2
-  } 
-}
-
-//boutton multi2
-btnMulti2.addEventListener("click", () => {
-        buyMulti2();
-});
-
-//fonction multi*4
-function multi4() {
-  multiplier = 4;
+const increment = () => {
+  score += multiplier;
   viewScore.innerText = score;
-  setTimeout(function() {
+  getAllMultiplicateur();
+};
+
+// les variables
+const viewScore = document.getElementById("viewScore");
+
+// fonction pour achat multi2/4
+function buyMulti(multiplier, cost) {
+  multi(multiplier);
+  if (score >= cost) {
+    score -= cost;
+    viewScore.innerText = score;
+    multi(multiplier);
+    // augmente le prix pour le prochain achat 
+    alert("Option activée. Le nouveau prix est de: " );
+    //btnMulti2.textContent = "Multi*2 ----" + costMulti2
+    getAllMultiplicateur();
+  }
+}
+//fonction multi*4/2
+function multi(multiplier) {
+  multiplier = multiplier;
+  viewScore.innerText = score;
+  setTimeout(function () {
     multiplier = 1;
   }, 15000);
 }
 
-// fonction pour achat multi4
-function buyMulti4() {
-  if (score >= costMulti4 ) {
-     score -= costMulti4; 
-     condition(btnMulti4,costMulti4);      
-     viewScore.innerText = score; 
-     multi4()
-     costMulti4 *= 3; 
-     alert("Option activée. Le nouveau prix est de: " + costMulti4);
-     btnMulti4.textContent = "Multi*4 ----" + costMulti4
-  } else {
-     alert("Vous n'avez pas assez de points!");
-  }
-}
-
-//boutton multi4
-btnMulti4.addEventListener("click", () => {
-  buyMulti4()
-});
-
 //fonction autoClick
 function autoClick() {
-  let autoClick = 
-  setInterval(() => {
-     //incrémente le score de 10  toute les 5 secondes pendant 10s
-     score += 10;
-     viewScore.textContent = score;
-   }, 5000);
-   setTimeout(() => {
+  let autoClick =
+    setInterval(() => {
+      //incrémente le score de 10  toute les 5 secondes pendant 10s
+      score += 10;
+      viewScore.textContent = score;
+    }, 5000);
+  setTimeout(() => {
     clearInterval(autoClick);
   }, 10000);
 }
 
 // fonction pour achat autoClick
-function buyAutoClick() {
-  if (score >= costAutoClick ) {
-     score -= costAutoClick;       // déduire le prix d'achat du score 
-     condition(btnAuto ,costAutoClick);
-     viewScore.innerText = score; // update le score
-     autoClick()
-     costAutoClick *= 2; 
-     alert("Option activée. Le nouveau prix est de: " + costAutoClick);
-     btnAuto.textContent = "Auto-Click-- " + costAutoClick ;
+function buyAutoClick(costAutoClick) {
+  if (score >= costAutoClick) {
+    score -= costAutoClick;       // déduire le prix d'achat du score 
+    viewScore.innerText = score; // update le score
+    autoClick()
+    costAutoClick *= 2;
+    alert("Option activée. Le nouveau prix est de: " );
+    // btnAuto.textContent = "Auto-Click-- " + costAutoClick ;
+    getAllMultiplicateur();
   }
 }
 
-//boutton autoClick
-btnAuto.addEventListener("click", () => {
-  buyAutoClick();
-});
+
 
 //fonction bonus
 function bonus() {
-   startBonus = 5;
+  startBonus = 5;
   setInterval(() => {
     if (startBonus >= 0) {
-      btnBonus.textContent = "Bonus-- " + costBonus + " Timer: " + startBonus;
-    } else {
-      btnBonus.textContent = "Bonus-- " + costBonus;
-    }
+       " Timer: " + startBonus;
+    } 
     startBonus >= 0 ? startBonus-- : startBonus;
   }, 1000);
 }
 
 // fonction pour achat bonus
-function buyBonus() {
-  if (score >= costBonus ) {
-     score -= costBonus;    
-     condition(btnBonus ,costBonus);   
-     viewScore.innerText = score; 
-     bonus()
-     costBonus *= 4; 
-     alert("Option activée. Le nouveau prix est de: " + costBonus);
-     btnBonus.textContent = "Bonus-- " + costBonus;
+function buyBonus(costBonus) {
+  if (score >= costBonus) {
+    score -= costBonus;
+    viewScore.innerText = score;
+    bonus()
+    costBonus *= 4;
+    alert("Option activée. Le nouveau prix est de: " );
+    getAllMultiplicateur();
   } else {
-     alert("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé
+    alert("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé
   }
 }
 
-//boutton bonus
-btnBonus.addEventListener("click", () => {
-  buyBonus();
-});
 
-//boutton reset 
-btnReset.addEventListener("click", () => {
-  location.reload();
-});
