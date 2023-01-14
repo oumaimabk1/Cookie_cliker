@@ -16,6 +16,20 @@ body {
 
  }
 .btn{
-    background: url('./images/game.png');
+    background: url('./images/pad.png');
     
 }
+
+.pad {
+    cursor: pointer;
+}
+
+
+.btn-losange {
+      width: 70px;
+      height: 70px;
+      padding: 10px;
+}
+  
+  
+

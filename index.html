@@ -5,81 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cookie Clicker</title>
 
-    <link rel="stylesheet" href="style.scss" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
     <link rel="stylesheet" href="./main.css" />
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   </head>
 
-  <body>
-    <div id="page2">
-      <header class="container py-4 px-3 mx-auto">
-        <ul class="nav nav-pills nav-fill">
-          <li class="nav-item">
-            <a class="nav-link  " aria-current="page" href="#"
-              >Cookie clicker</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" id="player">Player :</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Hight score</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Help</a>
-          </li>
-        </ul>
-      </header>
+  <body class="body overflow-hidden">
+    <header class="container d-flex justify-content-center align-items-center">
+      <ul class="nav nav-pills m-0">
+        <li class="nav-item mr-10">
+          <a class="nav-link text-light fw-bold" href="#" id="player">Player :</a>
+        </li>
+        <li class="nav-item mr-10">
+          <a class="nav-link text-light fw-bold" href="#">Hight score</a>
+        </li>
+        <li class="nav-item">
+          <span class="material-symbols-outlined  p-2 m-0">
+            notifications
+            </span>
+        </li>
+      </ul>
+    </header>
+
     <div class="container d-flex justify-content-center my-3">
-      <div class="row justify-content-center">
-        <div>
+        <div class="row justify-content-center">
           <div>
-            <p class="score fs-2  m-2 text-warning">score: <span id="viewScore"></span></p>
+            <h1 class="text-center ">Scores</h1>
+            <div>
+              <p class="score align-content-center fs-2 m-2 fs-2 fw-bold text-warning">score total</p> 
+              <p class="text-center" id="totalScore"></p>
+              <p class="score align-content-center fs-2 m-2 fs-2 fw-bold text-warning">score vue</p> 
+              <p class="text-center" id="viewScore"></p>
+            </div>
           </div>
-          <div>
-            <button type="button" class="btn btn-info " id="clicker">
-            
-            </button>
-          </div>
-          
-
-      </div>
-
-        <div class="wrapper justify-content-center">
-          <span> <button
-            type="button"
-            class=" btn btn-info text-info m-2 ms-3 w-25 h-50" id="btn-multi-2" valeur="200"
-          >
-            *2
-          </button></span>
-          <span> <button type="button" class=" btn btn-success text-success ms-3 w-50 h-50" id="btn-multi-4">
-            *4
-          </button></span>
-          <span> <button type="button" class="  btn btn-warning text-warning m-2 ms-3 w-50 h-50" id="btn-auto">
-            auto-click
-          </button></span>
-          <span>
-            <button type="button" class="  btn btn-primary text-primary m-2 ms-3 w-25 h-50" id="btn-bonus">
-              bonus
-            </button></span>
-          <span> <button type="button" class=" btn btn-danger text-danger m-2 ms-3 w-25" id="btn-reset">
-            reset
-          </button></span>
         </div>
       </div>
-     
-    </div>
-    <footer class="row fixed-bottom">
+      <div class="joystick mx-4 p-3 d-flex justify-content-center">
+        <button type="button" class="pad btn  " id="clicker">
+        
+        </button>
+      </div>
+      <div class="wrapper d-flex d-sm-flex-wrap justify-content-center align-content-center mx-4">
+
+
+        <span> 
+            <button type="button" class=" btn btn-info text-info  m-2 btn-losange" id="btn-multi-2" valeur="200">X</button>
+          </span>
+          <span> 
+            <button type="button" class=" btn btn-success text-success  m-2 btn-losange" id="btn-multi-4">Y</button>
+          </span>
+          <span> 
+            <button type="button" class="  btn btn-warning text-warning  m-2 btn-losange" id="btn-auto">O</button>
+          </span>
+          <span> 
+            <button type="button" class="  btn btn-primary text-primary  m-2 btn-losange" id="btn-bonus">B</button>
+          </span>
+          <span> 
+            <button type="button" class=" btn btn-danger text-danger  m-2 btn-losange" id="btn-reset">reset</button>
+          </span>
       
-        <div class="notifications">
-          <h1>message</h1>
+      <footer class="row fixed-bottom text-warning mx-5">
+        <div class="toast-body mx-5">
+          ...
         </div>
-    
-    </footer>
-
-    
-    <script type="module" src="./design.js"></script>
-  </body>
-</html>
+      </footer>
+      
+      </body>
+      </html>
+      
