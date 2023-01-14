@@ -3,14 +3,15 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const boom = require('boom');
+const Multiplicateur = require('../models/multiplicateur');
 
 module.exports = {
     register: async (req, res, next) => {
 
         try {
             // check if account already exist
-            let user = await Player.findOne({ email: req.body.email });
-            if (user) {
+            let player = await Player.findOne({ email: req.body.email });
+            if (player) {
                 return next(boom.badRequest('User already exist'));
             }
             //crypt("12345", 4) ---> "34567"
@@ -18,16 +19,22 @@ module.exports = {
             const salt = await bcrypt.genSalt(10);
             let password = await bcrypt.hash(req.body.password, salt);
             //insert user into DB
-            user = new Player({
+            player = new Player({
                 name: req.body.name,
                 email: req.body.email,
                 password: password,
             })
-            user = await user.save();
-            // return user id
+            player = await player.save();
+            Multiplicateur.find({}, function(err, multiplicateurs) {
+                Player.updateOne({ name: req.body.name }, { $push: { multiplicateur:  multiplicateurs  } }, function(err, player) {
+                  console.log(player);
+                });
+              });
             res.json({
-                id: user._id
+                player
             })
+            // return user id
+            
 
         } catch (err) {
             return next(boom.internal(err.message));
@@ -55,7 +62,8 @@ module.exports = {
                 token: token,
                 user: {
                     id: user._id,
-                    name: user.name
+                    name: user.name,
+                    multiplicateur: user.multiplicateur
                 }
             })
         } catch (err) {

@@ -1,11 +1,7 @@
 import * as bootstrap from "bootstrap";
-import { getMultiplicateur,updatecurrentPlayer } from './Apicookies';
+import { getMultiplicateur,updatecurrentPlayer,getOnePlayer } from './Apicookies';
 //header
-const currentPlayer = document.getElementById("player");
 
-//page 1
-let palyer = window.localStorage.getItem("user");
-console.log(updatecurrentPlayer())
 //fonction incrémentation 
 let score = 0;
 let multiplier = 1;
@@ -15,8 +11,14 @@ let tabMultiplicator = [];
 const buttons = document.getElementById('buttons'); 
 const buttonClicker = document.getElementById("clicker");
 
+
+//initialize
+
 const getAllMultiplicateur = async () => {
-  let multipli = await getMultiplicateur()
+  let palyer = window.localStorage.getItem("user");
+  let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
+  
+  let multipli = currentPlayer.multiplicateur[0]
 
   buttons.innerHTML =
     `
@@ -43,7 +45,7 @@ const getAllMultiplicateur = async () => {
   </button>
   `
   //declare buttons
-
+  
   const btnAuto = document.getElementById("btn-auto");
   const btnBonus = document.getElementById("btn-bonus");
   const btnReset = document.getElementById("btn-reset");
@@ -57,6 +59,8 @@ const getAllMultiplicateur = async () => {
       allButtons[i].addEventListener('click', () => {
         buyMulti(multipli[i].multi, multipli[i].cost)
         //update score and cost
+        updatecurrentPlayer(score,multipli[i])
+        getAllMultiplicateur()
       })
     }
    
@@ -66,12 +70,16 @@ const getAllMultiplicateur = async () => {
   btnAuto.addEventListener("click", () => {
     buyAutoClick(multipli[2].cost);
     //update score and cost
+    updatecurrentPlayer(score,multipli[2])
+        getAllMultiplicateur()
   });
 
   //boutton bonus
   btnBonus.addEventListener("click", () => {
     buyBonus(multipli[3].cost);
     //update score and cost
+    updatecurrentPlayer(score,multipli[3])
+        getAllMultiplicateur()
   });
 
   //boutton reset 
@@ -161,8 +169,6 @@ function buyAutoClick(costAutoClick) {
     getAllMultiplicateur();
   }
 }
-
-
 
 //fonction bonus
 function bonus() {

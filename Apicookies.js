@@ -9,13 +9,12 @@ export const login = async (data) => {
     console.log(response)
     if (response.ok) {
       const json = await response.json();
-      console.log('consolee', json.user)
+      console.log('consolee', JSON.stringify(json.user))
       //store token in local storage 
-      localStorage.setItem('user', json.user);
-      //redirect to home page 
-      alert('you are logged in')
+      window.localStorage.setItem('user', JSON.stringify(json.user));
+
       setTimeout(() => {
-        window.location.href = '/index.html';
+        window.location.href = './index.html';
       }, 1000)
 
     } else {
@@ -62,18 +61,46 @@ export const getMultiplicateur = async () => {
   }
 }
 
-//update score and multiplicateur
-export const updatePlayer =  () => {
-  let currentPlayer = localStorage.getItem('user');
-  
+
+
+
+export const getOnePlayer = async (id) => {
+
+  const player = await fetch("http://localhost:3000/players/" + id)
+  const currentPlayer = await player.json();
+  if (currentPlayer) {
+    return currentPlayer
+  } else {
+    return null
+  }
+}
+
+export const updatecurrentPlayer = async (score,multiplicateur) => {
+  let palyer = window.localStorage.getItem("user");
+  let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
+  console.log(score,multiplicateur)
+  currentPlayer.score = score;
+  currentPlayer.multiplicateur[0].map(el => {
+   if(el._id === multiplicateur._id){
+    el.cost *= 2;
+    el.numberOfBuy +=1;
+   }
+  })
   console.log(currentPlayer)
-  return currentPlayer
+  await updateOnePlayer(currentPlayer)
   
 }
-export const updatecurrentPlayer =  () => {
-  let currentPlayer = localStorage.getItem('user');
-  
-  console.log(currentPlayer)
-  return currentPlayer
-  
+
+export const updateOnePlayer = async (currentPlayer) => {
+
+  const response = await fetch("http://localhost:3000/players/" + currentPlayer._id, {
+      method: "PUT",
+      body: JSON.stringify(currentPlayer),
+      headers: { "Content-Type": "application/json" },
+    });
+    if(response){
+      console.log(response)
+    }else{
+      console.log('no')
+    }
 }
