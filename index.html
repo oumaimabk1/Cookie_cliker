@@ -4,7 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cookie Clicker</title>
+
     <link rel="stylesheet" href="style.scss" />
+    <link rel="stylesheet" href="./main.css" />
   </head>
 
   <body>
@@ -29,7 +31,7 @@
       </header>
 
       <section class="d-flex justify-content-around">
-        <section>
+        <section class="col my-1npm mx-4">
           <h1>message</h1>
         </section>
 
@@ -42,60 +44,56 @@
               Clicker
             </button>
           </div>
-          <div>
-            Timer : <span id="timer"></span>
-            <!-- doit etre dans bonus-->
-          </div>
+          
         </section>
 
         <section class="row w-25">
-          <button
-            type="button"
-            class="btn btn-primary m-2"
-            id="btn-multi-2"
-            valeur="200"
-          >
+          <button type="button" class="btn btn-primary m-2" id="btn-multi-2" disabled>
             *2
           </button>
-          <button type="button" class="btn btn-primary m-2" id="btn-multi-4">
+          <button type="button" class="btn btn-primary m-2" id="btn-multi-4" disabled>
             *4
           </button>
-          <button type="button" class="btn btn-primary m-2" id="btn-auto">
+          <button type="button" class="btn btn-primary m-2" id="btn-auto" disabled>
             auto-click
           </button>
-          <button type="button" class="btn btn-primary m-2" id="btn-bonus">
-            bonus
+          <button type="button" class="btn btn-primary m-2" id="btn-bonus" disabled>
+           <p> bonus
+            
+               <span id="timer"> timer</span></p>
+              <!-- doit etre dans bonus-->
+            
           </button>
           <button type="button" class="btn btn-danger m-2" id="btn-reset">
             reset
           </button>
         </section>
       </section>
-      <section class="col">
-        <h3>Chat box</h3>
-        <textarea></textarea>
-      </section>
+      <footer>
+  
+      </footer>
     </div>
+
+    <!--page authentification-->
     <div
-   
       class="input-group mb-3 d-flex flex-column justify-content-center align-items-center"
       id="page1"
-      style="height: 100vh;"
+      style="height: 100vh"
     >
       <h1 class="m-5">Cookie clicker</h1>
       <br />
 
       <input
-      id="username"
+        id="username"
         type="text"
         placeholder="Username"
         aria-label="Username"
         aria-describedby="basic-addon1"
       />
-      <button type="button" class="btn btn-info m-5" disabled id="start-game">Start Game</button>
+      <button type="button" class="btn btn-info m-5" disabled id="start-game">
+        Start Game
+      </button>
     </div>
-
-    
     <script type="module" src="index.js"></script>
   </body>
 </html>
