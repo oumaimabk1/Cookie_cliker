@@ -21,8 +21,34 @@ const getAllMultiplicateur = async () => {
   let multipli = currentPlayer.multiplicateur[0]
 
   buttons.innerHTML =
-    `
- <button type="button" class="btn btn-primary m-2" id="btn-multi-2" disabled>
+  `  <span> 
+  <button type="button" class=" btn btn-info text-info  m-2 btn-losange" id="btn-multi-2" valeur="200">
+  <span class='top'>${multipli[0].multi}</span>
+  X
+  <span class='bottom'>${multipli[0].cost}</span></button>
+</span>
+<span> 
+  <button type="button" class=" btn btn-success text-success  m-2 btn-losange" id="btn-multi-4">
+  <span class='top'>${multipli[1].multi}</span>
+  Y
+  <span class='bottom'>${multipli[1].cost}</span></button>
+</span>
+<span> 
+  <button type="button" class="  btn btn-warning text-warning  m-2 btn-losange" id="btn-auto">
+  <span class='top'>${multipli[2].multi}</span>
+  O
+  <span class='bottom'>${multipli[2].cost}</span></button>
+</span>
+<span> 
+  <button type="button" class="  btn btn-primary text-primary  m-2 btn-losange" id="btn-bonus">
+  <span class='top'>${multipli[3].multi}</span>
+  B
+  <span class='bottom'>${multipli[3].cost}</span></button>
+</span>
+<span> 
+  <button type="button" class=" btn btn-danger text-danger  m-2 btn-losange" id="btn-reset">reset</button>
+</span>  `
+ /*<button type="button" class="btn btn-primary m-2" id="btn-multi-2" disabled>
    <div>
    <p>*${multipli[0].multi} <span> cost ${multipli[0].cost}</span></p>
    </div>
@@ -43,7 +69,7 @@ const getAllMultiplicateur = async () => {
   <button type="button" class="btn btn-danger m-2" id="btn-reset">
       reset
   </button>
-  `
+  `*/
   //declare buttons
   
   const btnAuto = document.getElementById("btn-auto");
@@ -51,15 +77,15 @@ const getAllMultiplicateur = async () => {
   const btnReset = document.getElementById("btn-reset");
 
 
-  let allButtons = buttons.children;
-
-  for (let i = 0; i< 4 ; i ++) {
-    allButtons[i].disabled = score < multipli[i].cost
-    if(i<2){
+  let allButtons = document.querySelectorAll('button');
+console.log(allButtons)
+  for (let i = 1; i< 5; i ++) {
+    allButtons[i].disabled = score < multipli[i-1].cost
+    if(i<3){
       allButtons[i].addEventListener('click', () => {
-        buyMulti(multipli[i].multi, multipli[i].cost)
+        buyMulti(multipli[i-1].multi, multipli[i-1].cost)
         //update score and cost
-        updatecurrentPlayer(score,multipli[i])
+        updatecurrentPlayer(score,multipli[i-1])
         getAllMultiplicateur()
       })
     }

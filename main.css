@@ -1,3 +1,4 @@
+
 body {
     font-size: "Times New Roman";
     Color: white;
@@ -7,3 +8,36 @@ body {
     background-position: center;
     background-attachment: fixed;
     }
+#clicker {
+    width: 320px;
+    height: 200px;
+    background: url('./images/play.svg');
+    border-style: none;
+
+ }
+.btn{
+    background: url('./images/pad.png');
+    position: relative;
+}
+
+.pad {
+    cursor: pointer;
+}
+
+
+.btn-losange {
+      width: 70px;
+      height: 70px;
+      padding: 10px;
+}
+  
+.top{
+    position: absolute;
+    top: 0;
+    left: 2;
+}
+.bottom{
+    position: absolute;
+    bottom: 0;
+    right: 2;
+}
