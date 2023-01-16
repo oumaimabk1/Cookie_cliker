@@ -123,14 +123,14 @@ const getAllMultiplicateur = async () => {
   let allButtons = document.querySelectorAll('button');
   //ici j'ai recuperer tous les bouttons, comme la premiere d'indice 0 est 
   //le boutton clicker j'ai commencé par le boutto n2 d'indice 1
-  for (let i = 1; i < 5; i++) {
-    allButtons[i].disabled = score < multipli[i - 1].cost
+  for (let i = 2; i < 6; i++) {
+    allButtons[i].disabled = score < multipli[i - 2].cost
     if (i < 3) {
       allButtons[i].addEventListener('click', () => {
-        console.log(multipli[i - 1].multi)
-        buyMulti(multipli[i - 1].multi, multipli[i - 1].cost)
+        console.log(multipli[i - 2].multi)
+        buyMulti(multipli[i - 2].multi, multipli[i - 2].cost)
         //update score and cost
-        updatecurrentPlayer(score, multipli[i - 1])
+        updatecurrentPlayer(score, multipli[i - 2])
         getAllMultiplicateur()
         messages.innerHTML = "";
         displayBanque()
