@@ -9,7 +9,7 @@ import { Notyf } from 'notyf';
 });*/
 
 const notyf = new Notyf({
-  duration: 1000,
+  duration: 2000,
   position: {
     x: 'right',
     y: 'top',
@@ -218,7 +218,7 @@ function multi(multipli) {
   multiplier = multipli;
   viewScore.innerText = score;
   setTimeout(function () {
-    alert('ticket finalisé')
+    notyf.success('ticket finalisé')
     multiplier = 1;
   }, 15000);
 }
@@ -232,7 +232,7 @@ function autoClick() {
       viewScore.textContent = score;
     }, 1000);
   setTimeout(() => {
-    alert('ticket finalisé')
+    notyf.success('ticket finalisé')
     clearInterval(autoClick);
   }, 10000);
 }
@@ -273,6 +273,48 @@ function buyBonus(costBonus) {
     notyf.error("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé
   }
 }
+//fonction reset mais en backend
+const resetBackend = async () => {
+  try {
+    let player = window.localStorage.getItem("user");
+    let currentPlayer = await getOnePlayer(JSON.parse(player).id);
+    currentPlayer.score = 0;
+    currentPlayer.multiplicateur = [{
+      "name": "X2",
+      "multi": 2,
+      "cost": 200,
+      "numberOfBuy": 0,
+      "Totalcoast": 0
+    },
+    {
+      "name": "X4",
+      "multi": 4,
+      "cost": 400,
+      "numberOfBuy": 0,
+      "Totalcoast": 0
+    },
+    {
+      "name": "Auto",
+      "multi": 1,
+      "cost": 1000,
+      "numberOfBuy": 0,
+      "Totalcoast": 0
+    },
+    {
+      "name": "Bonus",
+      "multi": 1,
+      "cost": 5000,
+      "numberOfBuy": 0,
+      "Totalcoast": 0
+    }]
+    let updatedPlayer = await updatecurrentPlayer(currentPlayer);
+    window.localStorage.setItem("user", JSON.stringify(updatedPlayer));
+    return updatedPlayer;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 
 }else{
   window.location.href='./login.html'
