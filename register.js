@@ -1,4 +1,6 @@
-import "./main.css";
+
+//registration method
+import { register } from './Apicookies'
 
 const form = document.getElementById("registration-form");
 form.addEventListener("submit", async (event) => {
