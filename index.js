@@ -5,7 +5,8 @@ import { getMultiplicateur, updatecurrentPlayer, getOnePlayer } from './Apicooki
 //fonction incrémentation 
 let score = 0;
 let multiplier = 1;
-
+// les variables
+const viewScore = document.getElementById("viewScore");
 //recuperer les multiplicateur du base de donnees et afficher les bouttons 
 const buttons = document.getElementById('buttons');
 const buttonClicker = document.getElementById("clicker");
@@ -145,8 +146,6 @@ const increment = () => {
   getAllMultiplicateur();
 };
 
-// les variables
-const viewScore = document.getElementById("viewScore");
 
 // fonction pour achat multi2/4
 function buyMulti(multipli, cost) {
@@ -156,9 +155,11 @@ function buyMulti(multipli, cost) {
     viewScore.innerText = score;
     multi(multipli);
     // augmente le prix pour le prochain achat 
-    alert("Option activée. Le nouveau prix est de: ");
+    notyf.success("Option activée. Le nouveau prix est de : ",cost*2);
     //btnMulti2.textContent = "Multi*2 ----" + costMulti2
     getAllMultiplicateur();
+  }else{
+    notyf.error("Vous n'avez pas assez d'argent");
   }
 }
 //fonction multi*4/2
@@ -191,7 +192,7 @@ function buyAutoClick(costAutoClick) {
     score -= costAutoClick;       // déduire le prix d'achat du score 
     viewScore.innerText = score; // update le score
     autoClick()
-    alert("Option activée. Le nouveau prix est de: ");
+    notyf.success("Option activée. Le nouveau prix est de: "+ cost*2 );
 
     getAllMultiplicateur();
   }
@@ -215,11 +216,39 @@ function buyBonus(costBonus) {
     score -= costBonus;
     viewScore.innerText = score;
     bonus()
-    alert("Option activée. Le nouveau prix est de: ");
+    notyf.success("Option activée. Le nouveau prix est de: " );
     getAllMultiplicateur();
   } else {
-    alert("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé
+  notyf.error("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé
   }
 }
 
 
+
+import { Notyf } from 'notyf';
+
+
+const notyf = new Notyf({
+  duration: 1000,
+  position: {
+    x: 'right',
+    y: 'top',
+  },
+  types: [
+    {
+      type: 'success',
+      background: 'orange',
+      icon: {
+        className: 'material-icons',
+        tagName: 'i',
+        text: 'warning'
+      }
+    },
+    {
+      type: 'error',
+      background: 'indianred',
+      duration: 2000,
+      dismissible: true
+    }
+  ]
+});
