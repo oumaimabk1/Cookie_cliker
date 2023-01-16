@@ -24,13 +24,44 @@
         <a class="nav-link text-light fw-bold" href="#">Meuilleur score</a>
       </li>
       <li class="nav-item">
-        <span class="material-symbols-outlined  p-2 m-0">
-          notifications
-        </span>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          Instructions
+        </button>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body text-dark">
+            <p>Le but du jeu est simple: faire un score de minimum 100000 en 3 minutes.
+              Il suffit de cliquer sur la manette pour augmenter ton score, en t'aidant des différentes options proposées.
+              </p>
+            <p>Multi2: chaque click vaudra 2 points pendant 30 secondes.
+              <br>-Prix initial: 50 points. 
+              <br> -Ce prix sera multiplié par 2 après chaque achat.
+            </p>
+            <p>Multi4: chaque click vaudra 4 points pendant 30 secondes.
+              <br> -Prix initial: 80 points. 
+              <br> -Ce prix sera multiplié par 3 après chaque achat.
+            </p>
+            <p>AutoClicker: le score augmente de 10 chaque 10 secondes pendant 30 secondes.
+              <br> -Prix initial: 100 points. 
+              <br> -Ce prix sera multiplié par 2 après chaque achat.
+            </p>
+            <p>Bonus: c'est le score qui sera multiplié par 2 à chaque click pendant 30 secondes.
+              <br> -Prix initial: 200 points. 
+              <br> -Ce prix sera multiplié par 3 après chaque achat.
+            </p>
+          </div>
+        </div>
+
       </li>
     </ul>
   </header>
-<!--  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+
+  
+
+
+
+
+<!--
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -39,7 +70,6 @@
           </button>
         </div>
         <div class="modal-body text-dark">
-         
           <p>Le but du jeu est simple: faire un score de minimum 100000 en 3 minutes.
             Il suffit de cliquer sur la manette pour augmenter ton score, en t'aidant des différentes options proposées.
             </p>
@@ -62,11 +92,14 @@
           <p class="text-danger fs-2 fw-bold text-center">A VOUS DE CLICKER</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="myModal">Fermer</button>
         </div>
       </div>
     </div>
-  </div>-->
+  </div>
+
+  -->
+
   <div class="container d-flex flex-wrap-reverse justify-content-around ">
     <div class="justify-content-center w-lg-25 w-sm-100 w-md-25 mt-5">
       <ul id="messages" class="list-unstyled">
