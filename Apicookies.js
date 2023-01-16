@@ -6,10 +6,10 @@ export const login = async (data) => {
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     });
-    console.log(response)
+   
     if (response.ok) {
       const json = await response.json();
-      console.log('consolee', JSON.stringify(json.user))
+      
       //store token in local storage 
       window.localStorage.setItem('user', JSON.stringify(json.user));
 
@@ -34,7 +34,6 @@ export const register = async (data) => {
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     });
-    console.log(response)
     if (response.ok) {
       //redirect to login page 
       alert('your are registred successfully')
@@ -78,7 +77,6 @@ export const getOnePlayer = async (id) => {
 export const updatecurrentPlayer = async (score,multiplicateur) => {
   let palyer = window.localStorage.getItem("user");
   let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
-  console.log(score,multiplicateur)
   currentPlayer.score = score;
   currentPlayer.multiplicateur[0].map(el => {
    if(el._id === multiplicateur._id){
@@ -86,7 +84,6 @@ export const updatecurrentPlayer = async (score,multiplicateur) => {
     el.numberOfBuy +=1;
    }
   })
-  console.log(currentPlayer)
   await updateOnePlayer(currentPlayer)
   
 }
@@ -99,7 +96,6 @@ export const updateOnePlayer = async (currentPlayer) => {
       headers: { "Content-Type": "application/json" },
     });
     if(response){
-      console.log(response)
     }else{
       console.log('no')
     }

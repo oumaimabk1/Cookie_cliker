@@ -1,28 +1,44 @@
 import * as bootstrap from "bootstrap";
-import { getMultiplicateur,updatecurrentPlayer,getOnePlayer } from './Apicookies';
+import { getMultiplicateur, updatecurrentPlayer, getOnePlayer } from './Apicookies';
 //header
 
 //fonction incrémentation 
 let score = 0;
 let multiplier = 1;
-let tabMultiplicator = [];
 
 //recuperer les multiplicateur du base de donnees et afficher les bouttons 
-const buttons = document.getElementById('buttons'); 
+const buttons = document.getElementById('buttons');
 const buttonClicker = document.getElementById("clicker");
-
-
+const messages = document.getElementById('messages');
 //initialize
 
+const displayBanque = async () =>{
+  let palyer = window.localStorage.getItem("user");
+  console.log(player)
+  let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
+  let multipli = currentPlayer.multiplicateur[0]
+  let numberOfBuy = multipli.filter(el => el.numberOfBuy != 0)
+  //let numberOfBuy = []
+  console.log(numberOfBuy)
+  if(numberOfBuy.length === 0){
+    messages.parentNode.style.display = "none";;
+  }
+  for (var i = 0; i < numberOfBuy.length; i++) {
+    var item = document.createElement("li");
+    item.innerHTML = `<li class="btn m-2 text-info bg-dark">
+    Vous avez acheter le ticket ${numberOfBuy[i].name} ${numberOfBuy[i].numberOfBuy} fois avec ${numberOfBuy[i].Totalcoast} points</li>`;
+    messages.appendChild(item);
+  }
+}
+displayBanque()
 const getAllMultiplicateur = async () => {
   let palyer = window.localStorage.getItem("user");
   let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
-  
   let multipli = currentPlayer.multiplicateur[0]
-
+ 
   buttons.innerHTML =
-  `  <span> 
-  <button type="button" class=" btn btn-info text-info  m-2 btn-losange" id="btn-multi-2" valeur="200">
+    `  <span> 
+  <button type="button" class="btn btn-info text-info  m-2 btn-losange" id="btn-multi-2" valeur="200">
   <span class='top'>${multipli[0].multi}</span>
   X
   <span class='bottom'>${multipli[0].cost}</span></button>
@@ -35,77 +51,64 @@ const getAllMultiplicateur = async () => {
 </span>
 <span> 
   <button type="button" class="  btn btn-warning text-warning  m-2 btn-losange" id="btn-auto">
-  <span class='top'>${multipli[2].multi}</span>
+  <span class='top'>auto</span>
   O
   <span class='bottom'>${multipli[2].cost}</span></button>
 </span>
 <span> 
   <button type="button" class="  btn btn-primary text-primary  m-2 btn-losange" id="btn-bonus">
-  <span class='top'>${multipli[3].multi}</span>
+  <span class='top'>bonus</span>
   B
-  <span class='bottom'>${multipli[3].cost}</span></button>
+  <span class='bottom'>${multipli[3].cost}</span>
+  <span id='timer'></span></button>
 </span>
 <span> 
   <button type="button" class=" btn btn-danger text-danger  m-2 btn-losange" id="btn-reset">reset</button>
 </span>  `
- /*<button type="button" class="btn btn-primary m-2" id="btn-multi-2" disabled>
-   <div>
-   <p>*${multipli[0].multi} <span> cost ${multipli[0].cost}</span></p>
-   </div>
- </button>
- <button type="button" class="btn btn-primary m-2" id="btn-multi-4" disabled>
- <div>
- <p>*${multipli[1].multi} <span> cost ${multipli[1].cost}</span></p>
- </div>
-  </button>
-  <button type="button" class="btn btn-primary m-2" id="btn-auto" disabled>
-     auto-click <span> cost ${multipli[2].cost}</span></p>
-  </button>
-  <button type="button" class="btn btn-primary m-2" id="btn-bonus" disabled>
-     <p> bonus    
-     <span> cost ${multipli[2].cost}</span></p>     
-  <span id="timer"></span></p>
-  </button>
-  <button type="button" class="btn btn-danger m-2" id="btn-reset">
-      reset
-  </button>
-  `*/
+
   //declare buttons
-  
+
   const btnAuto = document.getElementById("btn-auto");
   const btnBonus = document.getElementById("btn-bonus");
   const btnReset = document.getElementById("btn-reset");
 
 
   let allButtons = document.querySelectorAll('button');
-console.log(allButtons)
-  for (let i = 1; i< 5; i ++) {
-    allButtons[i].disabled = score < multipli[i-1].cost
-    if(i<3){
+  //ici j'ai recuperer tous les bouttons, comme la premiere d'indice 0 est 
+  //le boutton clicker j'ai commencé par le boutto n2 d'indice 1
+  for (let i = 1; i < 5; i++) {
+    allButtons[i].disabled = score < multipli[i - 1].cost
+    if (i < 3) {
       allButtons[i].addEventListener('click', () => {
-        buyMulti(multipli[i-1].multi, multipli[i-1].cost)
+        console.log(multipli[i - 1].multi)
+        buyMulti(multipli[i - 1].multi, multipli[i - 1].cost)
         //update score and cost
-        updatecurrentPlayer(score,multipli[i-1])
+        updatecurrentPlayer(score, multipli[i - 1])
         getAllMultiplicateur()
+        messages.innerHTML = "";
+        displayBanque()
       })
     }
-   
   }
 
   //boutton autoClick
   btnAuto.addEventListener("click", () => {
     buyAutoClick(multipli[2].cost);
     //update score and cost
-    updatecurrentPlayer(score,multipli[2])
-        getAllMultiplicateur()
+    updatecurrentPlayer(score, multipli[2])
+    getAllMultiplicateur()
+    messages.innerHTML = "";
+    displayBanque()
   });
 
   //boutton bonus
   btnBonus.addEventListener("click", () => {
     buyBonus(multipli[3].cost);
     //update score and cost
-    updatecurrentPlayer(score,multipli[3])
-        getAllMultiplicateur()
+    updatecurrentPlayer(score, multipli[3])
+    getAllMultiplicateur()
+    messages.innerHTML = "";
+    displayBanque()
   });
 
   //boutton reset 
@@ -118,18 +121,14 @@ console.log(allButtons)
 
 getAllMultiplicateur();
 
-//fonction condition d'achat d'option
-function condition(btn, cost) {
-  return btn.disabled = score < cost
-}
+
 let startBonus;
 //boutton clicker
 buttonClicker.addEventListener("click", () => {
-  console.log(startBonus);
   if (startBonus) {
     if (startBonus >= 0) {
       score *= 2;
-      console.log(score); //  le score sera multiplié par 2 chaque 30 secondes
+      //  le score sera multiplié par 2 chaque 30 secondes
       viewScore.innerText = score;
     } else {
       increment();
@@ -140,6 +139,7 @@ buttonClicker.addEventListener("click", () => {
 });
 
 const increment = () => {
+  console.log(multiplier)
   score += multiplier;
   viewScore.innerText = score;
   getAllMultiplicateur();
@@ -149,23 +149,24 @@ const increment = () => {
 const viewScore = document.getElementById("viewScore");
 
 // fonction pour achat multi2/4
-function buyMulti(multiplier, cost) {
-  multi(multiplier);
+function buyMulti(multipli, cost) {
+  multi(multipli);
   if (score >= cost) {
     score -= cost;
     viewScore.innerText = score;
-    multi(multiplier);
+    multi(multipli);
     // augmente le prix pour le prochain achat 
-    alert("Option activée. Le nouveau prix est de: " );
+    alert("Option activée. Le nouveau prix est de: ");
     //btnMulti2.textContent = "Multi*2 ----" + costMulti2
     getAllMultiplicateur();
   }
 }
 //fonction multi*4/2
-function multi(multiplier) {
-  multiplier = multiplier;
+function multi(multipli) {
+  multiplier = multipli;
   viewScore.innerText = score;
   setTimeout(function () {
+    alert('ticket finalisé')
     multiplier = 1;
   }, 15000);
 }
@@ -177,8 +178,9 @@ function autoClick() {
       //incrémente le score de 10  toute les 5 secondes pendant 10s
       score += 10;
       viewScore.textContent = score;
-    }, 5000);
+    }, 1000);
   setTimeout(() => {
+    alert('ticket finalisé')
     clearInterval(autoClick);
   }, 10000);
 }
@@ -189,9 +191,8 @@ function buyAutoClick(costAutoClick) {
     score -= costAutoClick;       // déduire le prix d'achat du score 
     viewScore.innerText = score; // update le score
     autoClick()
-    costAutoClick *= 2;
-    alert("Option activée. Le nouveau prix est de: " );
-    // btnAuto.textContent = "Auto-Click-- " + costAutoClick ;
+    alert("Option activée. Le nouveau prix est de: ");
+
     getAllMultiplicateur();
   }
 }
@@ -201,8 +202,9 @@ function bonus() {
   startBonus = 5;
   setInterval(() => {
     if (startBonus >= 0) {
-       " Timer: " + startBonus;
-    } 
+      document.getElementById('timer').innerText = "00:" + startBonus + "0";
+
+    }
     startBonus >= 0 ? startBonus-- : startBonus;
   }, 1000);
 }
@@ -213,8 +215,7 @@ function buyBonus(costBonus) {
     score -= costBonus;
     viewScore.innerText = score;
     bonus()
-    costBonus *= 4;
-    alert("Option activée. Le nouveau prix est de: " );
+    alert("Option activée. Le nouveau prix est de: ");
     getAllMultiplicateur();
   } else {
     alert("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé

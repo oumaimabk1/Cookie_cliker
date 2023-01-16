@@ -1,61 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cookie Clicker</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./main.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cookie Clicker</title>
 
-  <body class="body overflow-hidden">
-    <header class="container d-flex justify-content-center align-items-center">
-      <ul class="nav nav-pills m-0">
-        <li class="nav-item mr-10">
-          <a class="nav-link text-light fw-bold" href="#" id="player">Player :</a>
-        </li>
-        <li class="nav-item mr-10">
-          <a class="nav-link text-light fw-bold" href="#">Hight score</a>
-        </li>
-        <li class="nav-item">
-          <span class="material-symbols-outlined  p-2 m-0">
-            notifications
-            </span>
-        </li>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./main.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+
+<body class="body overflow-hidden">
+  <header class="container d-flex justify-content-center align-items-center">
+    <ul class="nav nav-pills m-0">
+      <li class="nav-item mr-10">
+        <a class="nav-link text-light fw-bold" href="#" id="player">Joueur :</a>
+      </li>
+      <li class="nav-item mr-10">
+        <a class="nav-link text-light fw-bold" href="#">Meuilleur score</a>
+      </li>
+      <li class="nav-item">
+        <span class="material-symbols-outlined  p-2 m-0">
+          notifications
+        </span>
+      </li>
+    </ul>
+  </header>
+  <div class="container d-flex flex-wrap-reverse justify-content-around ">
+    <div class="justify-content-center w-lg-25 w-sm-100 w-md-25 mt-5">
+      <ul id="messages" class="list-unstyled">
+        
       </ul>
-    </header>
-
-    <div class="container d-flex justify-content-center my-3">
-        <div class="row justify-content-center">
+    </div>
+    <div class="d-flex flex-column  justify-content-center my-3">
+      <div class="row justify-content-center">
+        <div>
+          <h1 class="text-center ">Scores</h1>
           <div>
-            <h1 class="text-center ">Scores</h1>
-            <div>
-              <p class="score align-content-center fs-2 m-2 fs-2 fw-bold text-warning">score total</p> 
-              <p class="text-center" id="totalScore"></p>
-              <p class="score align-content-center fs-2 m-2 fs-2 fw-bold text-warning">score vue</p> 
-              <p class="text-center" id="viewScore"></p>
-            </div>
+            <p class="score align-content-center fs-2 m-2 fs-2 fw-bold text-warning">score </p>
+            <p class="text-center" id="viewScore"></p>
           </div>
         </div>
       </div>
+
       <div class="joystick mx-4 p-3 d-flex justify-content-center">
         <button type="button" class="pad btn" id="clicker">
-        
+
         </button>
       </div>
       <div class="wrapper d-flex d-sm-flex-wrap justify-content-center align-content-center mx-4">
+        <div id="buttons">
 
-      <div  id="buttons">
-       
         </div>
-      <footer class="row fixed-bottom text-warning mx-5">
-        <div class="toast-body mx-5">
-          ...
-        </div>
-      </footer>
-      <script type="module" src="index.js"></script>
-      </body>
-      </html>
-      
+      </div>
+    </div> 
+  </div>
+  <footer class="row fixed-bottom text-warning mx-5">
+    <div class="toast-body mx-5">
+      ...
+    </div>
+  </footer>
+  <script type="module" src="index.js"></script>
+</body>
+
+</html>

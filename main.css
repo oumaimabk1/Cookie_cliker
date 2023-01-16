@@ -41,3 +41,8 @@ body {
     bottom: 0;
     right: 2;
 }
+#timer{
+    position: absolute;
+    bottom: 0;
+    left: 2;
+}
