@@ -51,11 +51,9 @@ const displayMeilleurscore = async()=>{
   let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
   console.log(currentPlayer)
   document.getElementById('player').innerText += currentPlayer.name ,
-  viewScore.innerHTML = currentPlayer.score || 0
-  
-  let scores = allPlayers.map(el => el.score ? el.score : 0)
+  viewScore.innerHTML = currentPlayer.score || 0;
+  let scores = allPlayers.map(el => el.score ? el.score : 0);
   document.getElementById('best_score').innerText += Math.max(...scores) 
-  
 }
 displayMeilleurscore()
 //display banque
@@ -164,9 +162,10 @@ const getAllMultiplicateur = async () => {
     console.log(conf)
     if (conf) {
       resetPlayer()
-      location.reload()
+      setTimeout(()=>{
+        location.reload()
+      },1000) 
     } 
-   
   });
 
 }

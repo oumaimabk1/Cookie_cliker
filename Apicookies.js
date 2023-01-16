@@ -102,9 +102,10 @@ const getMultiplier =async () =>{
   }
 }
 export const resetPlayer = async () => {
+  console.log('test')
   let palyer = window.localStorage.getItem("user");
   let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
-
+  console.log('rest',currentPlayer)
   currentPlayer.multiplicateur[0] = await getMultiplier()
   currentPlayer.score = 0
  
