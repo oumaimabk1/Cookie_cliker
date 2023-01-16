@@ -1,5 +1,32 @@
 import * as bootstrap from "bootstrap";
 import { getMultiplicateur,updatecurrentPlayer,getOnePlayer } from './Apicookies';
+import { Notyf } from 'notyf';
+
+
+const notyf = new Notyf({
+  duration: 1000,
+  position: {
+    x: 'right',
+    y: 'top',
+  },
+  types: [
+    {
+      type: 'success',
+      background: 'orange',
+      icon: {
+        className: 'material-icons',
+        tagName: 'i',
+        text: 'warning'
+      }
+    },
+    {
+      type: 'error',
+      background: 'indianred',
+      duration: 2000,
+      dismissible: true
+    }
+  ]
+});
 //header
 
 //fonction incrémentation 
@@ -92,17 +119,18 @@ console.log(allButtons)
    
   }
 
-  //boutton autoClick
   btnAuto.addEventListener("click", () => {
     buyAutoClick(multipli[2].cost);
+    notyf.success('bouton autoclick est activé pendant 5s');
     //update score and cost
     updatecurrentPlayer(score,multipli[2])
-        getAllMultiplicateur()
-  });
+    getAllMultiplicateur()
+    });
 
   //boutton bonus
   btnBonus.addEventListener("click", () => {
     buyBonus(multipli[3].cost);
+    notyf.success('bouton bonus est activé pendant 5s')
     //update score and cost
     updatecurrentPlayer(score,multipli[3])
         getAllMultiplicateur()
@@ -111,6 +139,7 @@ console.log(allButtons)
   //boutton reset 
   btnReset.addEventListener("click", () => {
     location.reload();
+    notyf.success('vous avez reset le jeu vos compteur sont à zéro')
   });
 
   return multipli
@@ -129,7 +158,7 @@ buttonClicker.addEventListener("click", () => {
   if (startBonus) {
     if (startBonus >= 0) {
       score *= 2;
-      console.log(score); //  le score sera multiplié par 2 chaque 30 secondes
+      notyf.success(' le score sera multiplié par 2 chaque 30 secondes') //  le score sera multiplié par 2 chaque 30 secondes
       viewScore.innerText = score;
     } else {
       increment();
@@ -156,15 +185,18 @@ function buyMulti(multiplier, cost) {
     viewScore.innerText = score;
     multi(multiplier);
     // augmente le prix pour le prochain achat 
-    alert("Option activée. Le nouveau prix est de: " );
+    notyf.success("Option activée. Le nouveau prix est de : ",cost*2);
     //btnMulti2.textContent = "Multi*2 ----" + costMulti2
     getAllMultiplicateur();
+  }else{
+    notyf.error("Vous n'avez pas assez d'argent");
   }
 }
 //fonction multi*4/2
 function multi(multiplier) {
   multiplier = multiplier;
   viewScore.innerText = score;
+  notyf.success("Option activée. Le nouveau prix est de : ",cost*2);
   setTimeout(function () {
     multiplier = 1;
   }, 15000);
@@ -177,6 +209,7 @@ function autoClick() {
       //incrémente le score de 10  toute les 5 secondes pendant 10s
       score += 10;
       viewScore.textContent = score;
+      notyf.success("votre score sera incrémenté de 10 toutes les 5s pendant 10s");
     }, 5000);
   setTimeout(() => {
     clearInterval(autoClick);
@@ -190,7 +223,7 @@ function buyAutoClick(costAutoClick) {
     viewScore.innerText = score; // update le score
     autoClick()
     costAutoClick *= 2;
-    alert("Option activée. Le nouveau prix est de: " );
+    notyf.success("Option activée. Le nouveau prix est de: "+ cost*2 );
     // btnAuto.textContent = "Auto-Click-- " + costAutoClick ;
     getAllMultiplicateur();
   }
@@ -205,6 +238,7 @@ function bonus() {
     } 
     startBonus >= 0 ? startBonus-- : startBonus;
   }, 1000);
+  notyf.success("vous avez activé le bonus" );
 }
 
 // fonction pour achat bonus
@@ -214,11 +248,13 @@ function buyBonus(costBonus) {
     viewScore.innerText = score;
     bonus()
     costBonus *= 4;
-    alert("Option activée. Le nouveau prix est de: " );
+    notyf.success("Option activée. Le nouveau prix est de: " );
     getAllMultiplicateur();
   } else {
-    alert("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé
+  notyf.error("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé
   }
 }
+
+
 
 
