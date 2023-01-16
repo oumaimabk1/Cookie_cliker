@@ -1,6 +1,13 @@
 import * as bootstrap from "bootstrap";
 import { getMultiplicateur,updatecurrentPlayer,getOnePlayer } from './Apicookies';
-//header
+//modal
+
+document.addEventListener("DOMContentLoaded", function() {
+  var myModal = new bootstrap.Modal(document.getElementById("myModal"));
+  myModal.show();
+});
+
+
 
 //fonction incrémentation 
 let score = 0;
@@ -22,7 +29,7 @@ const getAllMultiplicateur = async () => {
 
   buttons.innerHTML =
   `  <span> 
-  <button type="button" class=" btn btn-info text-info  m-2 btn-losange" id="btn-multi-2" valeur="200">
+  <button type="button" class=" btn btn-info text-info  m-2 btn-losange" id="btn-multi-2">
   <span class='top'>${multipli[0].multi}</span>
   X
   <span class='bottom'>${multipli[0].cost}</span></button>
