@@ -1,10 +1,12 @@
 import * as bootstrap from "bootstrap";
 import { getMultiplicateur, updatecurrentPlayer, getOnePlayer } from './Apicookies';
-//header
-
-
 import { Notyf } from 'notyf';
 
+//modal
+document.addEventListener("DOMContentLoaded", function () {
+  var myModal = new bootstrap.Modal(document.getElementById("myModal"));
+  myModal.show();
+});
 
 const notyf = new Notyf({
   duration: 1000,
@@ -42,7 +44,7 @@ const buttonClicker = document.getElementById("clicker");
 const messages = document.getElementById('messages');
 //initialize
 
-const displayBanque = async () =>{
+const displayBanque = async () => {
   let palyer = window.localStorage.getItem("user");
   console.log(player)
   let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
@@ -50,7 +52,7 @@ const displayBanque = async () =>{
   let numberOfBuy = multipli.filter(el => el.numberOfBuy != 0)
   //let numberOfBuy = []
   console.log(numberOfBuy)
-  if(numberOfBuy.length === 0){
+  if (numberOfBuy.length === 0) {
     messages.parentNode.style.display = "none";;
   }
   for (var i = 0; i < numberOfBuy.length; i++) {
@@ -65,7 +67,7 @@ const getAllMultiplicateur = async () => {
   let palyer = window.localStorage.getItem("user");
   let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
   let multipli = currentPlayer.multiplicateur[0]
- 
+
   buttons.innerHTML =
     `  <span> 
   <button type="button" class="btn btn-info text-info  m-2 btn-losange" id="btn-multi-2" valeur="200">
@@ -184,10 +186,10 @@ function buyMulti(multipli, cost) {
     viewScore.innerText = score;
     multi(multipli);
     // augmente le prix pour le prochain achat 
-    notyf.success("Option activée. Le nouveau prix est de : ",cost*2);
+    notyf.success("Option activée. Le nouveau prix est de : ", cost * 2);
     //btnMulti2.textContent = "Multi*2 ----" + costMulti2
     getAllMultiplicateur();
-  }else{
+  } else {
     notyf.error("Vous n'avez pas assez d'argent");
   }
 }
@@ -221,7 +223,7 @@ function buyAutoClick(costAutoClick) {
     score -= costAutoClick;       // déduire le prix d'achat du score 
     viewScore.innerText = score; // update le score
     autoClick()
-    notyf.success("Option activée. Le nouveau prix est de: "+ cost*2 );
+    notyf.success("Option activée. Le nouveau prix est de: " + cost * 2);
 
     getAllMultiplicateur();
   }
@@ -245,10 +247,10 @@ function buyBonus(costBonus) {
     score -= costBonus;
     viewScore.innerText = score;
     bonus()
-    notyf.success("Option activée. Le nouveau prix est de: " );
+    notyf.success("Option activée. Le nouveau prix est de: ");
     getAllMultiplicateur();
   } else {
-  notyf.error("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé
+    notyf.error("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé
   }
 }
 
