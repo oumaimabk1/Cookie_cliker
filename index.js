@@ -3,10 +3,10 @@ import { getMultiplicateur, updatecurrentPlayer, getOnePlayer } from './Apicooki
 import { Notyf } from 'notyf';
 
 //modal
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
   var myModal = new bootstrap.Modal(document.getElementById("myModal"));
   myModal.show();
-});
+});*/
 
 const notyf = new Notyf({
   duration: 1000,
