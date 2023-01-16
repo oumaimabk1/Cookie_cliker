@@ -14,8 +14,8 @@
         <h1 class="text-center">Registration</h1>
         <form id="registration-form" class="my-5">
             <div class="form-group">
-                <label for="username">username</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter your name">
+                <label for="name">name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
@@ -25,10 +25,13 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Enter your password">
             </div>
-            <button type="submit" class="btn btn-primary m-auto text-center">Register</button>
-            
+            <div class="d-flex justify-content-between align-items-center">
+                <button type="submit" class="btn btn-primary mt-2 text-center">Register</button>
+                <a href="./registration.html">Login</a>
+            </div>
+
         </form>
-       
+
     </div>
     <script type="module" src="./register.js"></script>
 </body>

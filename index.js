@@ -1,5 +1,5 @@
 import * as bootstrap from "bootstrap";
-import { getMultiplicateur, updatecurrentPlayer, getOnePlayer } from './Apicookies';
+import { getPlayers, updatecurrentPlayer, getOnePlayer,resetPlayer } from './Apicookies';
 import { Notyf } from 'notyf';
 
 //modal
@@ -32,7 +32,8 @@ const notyf = new Notyf({
     }
   ]
 });
-
+const user = window.localStorage.getItem("user");
+if (user){
 //fonction incrémentation 
 let score = 0;
 let multiplier = 1;
@@ -42,16 +43,29 @@ const viewScore = document.getElementById("viewScore");
 const buttons = document.getElementById('buttons');
 const buttonClicker = document.getElementById("clicker");
 const messages = document.getElementById('messages');
-//initialize
+
+//display meuilleur score
+const displayMeilleurscore = async()=>{
+  let allPlayers = await getPlayers()
+  let palyer = window.localStorage.getItem("user");
+  let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
+  console.log(currentPlayer)
+  document.getElementById('player').innerText += currentPlayer.name ,
+  viewScore.innerHTML = currentPlayer.score || 0
+  
+  let scores = allPlayers.map(el => el.score ? el.score : 0)
+  document.getElementById('best_score').innerText += Math.max(...scores) 
+  
+}
+displayMeilleurscore()
+//display banque
 
 const displayBanque = async () => {
   let palyer = window.localStorage.getItem("user");
-  console.log(player)
   let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
   let multipli = currentPlayer.multiplicateur[0]
   let numberOfBuy = multipli.filter(el => el.numberOfBuy != 0)
   //let numberOfBuy = []
-  console.log(numberOfBuy)
   if (numberOfBuy.length === 0) {
     messages.parentNode.style.display = "none";;
   }
@@ -63,11 +77,12 @@ const displayBanque = async () => {
   }
 }
 displayBanque()
+
 const getAllMultiplicateur = async () => {
   let palyer = window.localStorage.getItem("user");
   let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
   let multipli = currentPlayer.multiplicateur[0]
-
+  
   buttons.innerHTML =
     `  <span> 
   <button type="button" class="btn btn-info text-info  m-2 btn-losange" id="btn-multi-2" valeur="200">
@@ -145,10 +160,15 @@ const getAllMultiplicateur = async () => {
 
   //boutton reset 
   btnReset.addEventListener("click", () => {
-    location.reload();
+    let conf = confirm("Are you sure you want to rest the game?");
+    console.log(conf)
+    if (conf) {
+      resetPlayer()
+      location.reload()
+    } 
+   
   });
 
-  return multipli
 }
 
 getAllMultiplicateur();
@@ -254,3 +274,6 @@ function buyBonus(costBonus) {
   }
 }
 
+}else{
+  window.location.href='./login.html'
+}

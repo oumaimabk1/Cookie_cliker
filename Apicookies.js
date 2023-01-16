@@ -50,11 +50,11 @@ export const register = async (data) => {
 }
 
 //recuperer les multiplicateurs 
-export const getMultiplicateur = async () => {
-  const multiplicateur = await fetch("http://localhost:3000/multiplicateur");
-  const multi = await multiplicateur.json();
-  if (multi) {
-    return multi
+export const getPlayers = async () => {
+  const players = await fetch("http://localhost:3000/players");
+  const dataplayers = await players.json();
+  if (dataplayers) {
+    return dataplayers
   } else {
     return []
   }
@@ -67,6 +67,7 @@ export const getOnePlayer = async (id) => {
 
   const player = await fetch("http://localhost:3000/players/" + id)
   const currentPlayer = await player.json();
+ 
   if (currentPlayer) {
     return currentPlayer
   } else {
@@ -82,8 +83,31 @@ export const updatecurrentPlayer = async (score,multiplicateur) => {
    if(el._id === multiplicateur._id){
     el.cost *= 2;
     el.numberOfBuy +=1;
+    el.TotalCost += el.cost
    }
   })
+  await updateOnePlayer(currentPlayer)
+  
+}
+
+const getMultiplier =async () =>{
+
+  const multi = await fetch("http://localhost:3000/multiplicateur")
+  const multiplier = await multi.json();
+  console.log('this',multiplier)
+  if (multiplier) {
+    return multiplier
+  } else {
+    return null
+  }
+}
+export const resetPlayer = async () => {
+  let palyer = window.localStorage.getItem("user");
+  let currentPlayer = await getOnePlayer(JSON.parse(palyer).id)
+
+  currentPlayer.multiplicateur[0] = await getMultiplier()
+  currentPlayer.score = 0
+ 
   await updateOnePlayer(currentPlayer)
   
 }

@@ -19,6 +19,7 @@
   "homepage": "https://github.com/oumaimabk1/Cookie_cliker#readme",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.2",
+    "file-loader": "^6.2.0",
     "parcel": "^2.8.2"
   },
   "dependencies": {

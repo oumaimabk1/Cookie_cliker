@@ -1,13 +1,12 @@
-//registration method
-import { register } from './Apicookies'
+import "./main.css";
 
 const form = document.getElementById("registration-form");
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const username = document.getElementById("username").value;
+  const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  const data = { username, email, password };
+  const data = { name, email, password };
   await register(data)
 });
 

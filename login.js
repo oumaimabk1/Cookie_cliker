@@ -1,5 +1,4 @@
-import {login} from './Apicookies'
-
+import "./main.css";
 const form = document.getElementById("login-form");
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
