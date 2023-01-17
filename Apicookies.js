@@ -1,7 +1,7 @@
 //login function
 export const login = async (data) => {
   try {
-    const response = await fetch("http://localhost:3000/auth/login", {
+    const response = await fetch("https://clicker-backend.onrender.com/auth/login", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -29,7 +29,7 @@ export const login = async (data) => {
 
 export const register = async (data) => {
   try {
-    const response = await fetch("http://localhost:3000/auth/register", {
+    const response = await fetch("https://clicker-backend.onrender.com/auth/register", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -51,7 +51,7 @@ export const register = async (data) => {
 
 //recuperer les multiplicateurs 
 export const getPlayers = async () => {
-  const players = await fetch("http://localhost:3000/players");
+  const players = await fetch("https://clicker-backend.onrender.com/players");
   const dataplayers = await players.json();
   if (dataplayers) {
     return dataplayers
@@ -65,7 +65,7 @@ export const getPlayers = async () => {
 
 export const getOnePlayer = async (id) => {
 
-  const player = await fetch("http://localhost:3000/players/" + id)
+  const player = await fetch("https://clicker-backend.onrender.com/players/" + id)
   const currentPlayer = await player.json();
  
   if (currentPlayer) {
@@ -92,7 +92,7 @@ export const updatecurrentPlayer = async (score,multiplicateur) => {
 
 const getMultiplier =async () =>{
 
-  const multi = await fetch("http://localhost:3000/multiplicateur")
+  const multi = await fetch("https://clicker-backend.onrender.com/multiplicateur")
   const multiplier = await multi.json();
   console.log('this',multiplier)
   if (multiplier) {
@@ -115,7 +115,7 @@ export const resetPlayer = async () => {
 
 export const updateOnePlayer = async (currentPlayer) => {
 
-  const response = await fetch("http://localhost:3000/players/" + currentPlayer._id, {
+  const response = await fetch("https://clicker-backend.onrender.com/players/" + currentPlayer._id, {
       method: "PUT",
       body: JSON.stringify(currentPlayer),
       headers: { "Content-Type": "application/json" },
