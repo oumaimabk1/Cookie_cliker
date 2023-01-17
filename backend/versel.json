@@ -1,7 +1,11 @@
 {
     "version": 2,
     "builds": [
-        { "src": "./bin/www", "use": "@versel/node" }
+        { "src": "*.js", "use": "@versel/node" ,
+        "headers": {
+            "cache-control": "s-maxage=0"
+          }
+        }
     ],
     "routes":[
         {
