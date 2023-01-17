@@ -1,0 +1,12 @@
+{
+    "version": 2,
+    "builds": [
+        { "src": "./bin/www", "use": "@versel/node" }
+    ],
+    "routes":[
+        {
+            "src":"/(.*)",
+            "dest":"/"
+        }
+    ]
+}
