@@ -1,0 +1,47 @@
+body {
+  font-size: "Times New Roman";
+  color: #fff;
+  background: url("fond.dada63a9.png") center / cover no-repeat fixed;
+}
+
+#clicker {
+  width: 320px;
+  height: 200px;
+  background: url("play.1dee979d.svg");
+  border-style: none;
+}
+
+.btn {
+  background: url("pad.ab2b5aa3.png");
+  position: relative;
+}
+
+.pad {
+  cursor: pointer;
+}
+
+.btn-losange {
+  width: 70px;
+  height: 70px;
+  padding: 10px;
+}
+
+.top {
+  position: absolute;
+  top: 0;
+  left: 2px;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  right: 2px;
+}
+
+#timer {
+  position: absolute;
+  bottom: 0;
+  left: 2px;
+}
+
+/*# sourceMappingURL=login.ad82dce7.css.map */
