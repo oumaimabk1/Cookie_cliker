@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const config = require('config');
+require("dotenv/config")
 const boom = require('boom');
 
 module.exports = function(req, res, next) {
@@ -10,7 +10,7 @@ module.exports = function(req, res, next) {
         return next(boom.forbidden("Access denied. No token provided"));
     }
     try {
-        const decoded = jwt.verify(token, config.get('jwtPrivateJey'));
+        const decoded = jwt.verify(token, process.env.TOKEN_SECRET_KEY);
         req.user = decoded;
         next();
 

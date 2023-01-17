@@ -1,9 +1,9 @@
 const Player = require('../models/Player');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const boom = require('boom');
 const Multiplicateur = require('../models/multiplicateur');
+require("dotenv/config")
 
 module.exports = {
     register: async (req, res, next) => {
@@ -56,7 +56,7 @@ module.exports = {
             const token = jwt.sign({
                 id: user._id,
                 name: user.name
-            }, config.get('jwtPrivateJey'), { expiresIn: '5min' });
+            }, process.env.TOKEN_SECRET_KEY, { expiresIn: '5min' });
 
             res.json({
                 token: token,
