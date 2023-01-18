@@ -16,18 +16,18 @@
 
   <header class="container d-flex justify-content-center align-items-center">
     <ul class="nav nav-pills mt-2 d-flex justify-content-between">
-      <li>
-        <h4 class="text-center border border-success rounded-2 bg-dark p-2">Click Manette</h4>
+      
+      <li class="nav-item mr-10">
+        <a class="nav-link text-light fs-2 fw-bold" href="#" id="player">Joueur :</a>
       </li>
       <li class="nav-item mr-10">
-        <a class="nav-link text-light fw-bold" href="#" id="player">Joueur :</a>
-      </li>
-      <li class="nav-item mr-10">
-        <a class="nav-link text-light fw-bold" href="#" id="best_score">Meuilleur score</a>
+        <a class="nav-link text-light fs-2 fw-bold" href="#" id="best_score">Meuilleur score :</a>
       </li>
       <li class="nav-item">
         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Instructions
+          <span class="material-symbols-outlined">
+            key
+            </span>
         </button>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -74,10 +74,10 @@
     <div class="d-flex flex-column  justify-content-center my-3">
       <div class="row justify-content-center">
         <div>
-          <h1 class="text-center ">Scores</h1>
+          <h1 class="text-center  text-warning">Scores</h1>
           <div>
-            <p class="score align-content-center fs-2 m-2 fs-2 fw-bold text-warning">score </p>
-            <p class="text-center" id="viewScore"></p>
+            
+            <p class="text-center fs-2 fw-bold" id="viewScore"></p>
           </div>
         </div>
       </div>
