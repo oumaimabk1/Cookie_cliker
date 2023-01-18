@@ -11,11 +11,11 @@ const notyf = new Notyf({
   types: [
     {
       type: 'success',
-      background: 'vert',
+      background: 'orange',
       icon: {
         className: 'material-icons',
         tagName: 'i',
-        text: 'light'
+        text: 'warning'
       }
     },
     {

@@ -544,11 +544,11 @@ const notyf = new (0, _notyf.Notyf)({
     types: [
         {
             type: "success",
-            background: "vert",
+            background: "orange",
             icon: {
                 className: "material-icons",
                 tagName: "i",
-                text: "light"
+                text: "warning"
             }
         },
         {
