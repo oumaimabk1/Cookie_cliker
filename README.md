@@ -1,5 +1,5 @@
 # Cookie_cliker
-## Cookie Clicker
+
 Cookie Clicker is a simple and addictive game in which the player clicks a button labeled "manette" in order to increase their score.  
 
 The player starts with a score of 0 and can increase it by clicking the "manette" button.  
@@ -10,6 +10,13 @@ The player can also purchase various options (Price increases by 2x with each pu
 •	Bonus: Score is multiplied by 2 with each click for 30 seconds.   
 The player's progress is saved between game sessions.  
 
+![image](https://user-images.githubusercontent.com/53181743/213187724-13e564a1-2474-41b3-bdfa-7d04bf4f7324.png)
+
+
+
+## See it live
+
+[dema](https://alexhealth.000webhostapp.com/)
 ## Technical details
 ## Installation
 
