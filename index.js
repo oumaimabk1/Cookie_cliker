@@ -66,7 +66,7 @@ const displayBanque = async () => {
   for (var i = 0; i < numberOfBuy.length; i++) {
     var item = document.createElement("li");
     item.innerHTML = `<li class="btn m-2 text-info bg-dark">
-    Vous avez acheter le ticket ${numberOfBuy[i].name} ${numberOfBuy[i].numberOfBuy} fois avec ${numberOfBuy[i].TotalCost} points</li>`;
+    Vous avez acheté le ticket ${numberOfBuy[i].name} ${numberOfBuy[i].numberOfBuy} fois avec ${numberOfBuy[i].TotalCost} points</li>`;
     messages.appendChild(item);
   }
 }
