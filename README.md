@@ -12,11 +12,9 @@ The player's progress is saved between game sessions.
 
 ![image](https://user-images.githubusercontent.com/53181743/213187724-13e564a1-2474-41b3-bdfa-7d04bf4f7324.png)
 
-
-
 ## See it live
 
-[dema](https://alexhealth.000webhostapp.com/)
+[demo](https://alexhealth.000webhostapp.com/)
 ## Technical details
 ## Installation
 
