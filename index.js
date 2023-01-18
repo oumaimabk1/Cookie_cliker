@@ -17,18 +17,18 @@ const notyf = new Notyf({
   types: [
     {
       type: 'success',
-      background: 'orange',
+      background: 'vert',
       icon: {
         className: 'material-icons',
         tagName: 'i',
-        text: 'warning'
+        text: 'light'
       }
     },
     {
       type: 'error',
-      background: 'indianred',
-      duration: 2000,
-      dismissible: true
+      background: 'rouge',
+      duration: 3000,
+      
     }
   ]
 });
