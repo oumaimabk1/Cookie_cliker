@@ -10,12 +10,12 @@ const notyf = new Notyf({
   },
   types: [
     {
-      type: 'success',
+      type: 'orange',
       background: 'vert',
       icon: {
         className: 'material-icons',
         tagName: 'i',
-        text: 'light'
+        text: 'warning'
       }
     },
     {
