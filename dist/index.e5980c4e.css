@@ -44,4 +44,27 @@ body {
   left: 2px;
 }
 
+.marquee-rtl {
+  width: 100%;
+  max-width: 30em;
+  overflow: hidden;
+}
+
+.marquee-rtl > ul {
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 10px 2em 10px 100%;
+  animation: 10s linear infinite defilement-rtl;
+}
+
+@keyframes defilement-rtl {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(-400%);
+  }
+}
+
 /*# sourceMappingURL=index.e5980c4e.css.map */

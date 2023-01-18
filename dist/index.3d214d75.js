@@ -592,8 +592,8 @@ else {
         if (numberOfBuy.length === 0) messages.parentNode.style.display = "none";
         for(var i = 0; i < numberOfBuy.length; i++){
             var item = document.createElement("li");
-            item.innerHTML = `<li class="btn m-2 text-info bg-dark">
-    Vous avez acheté le ticket ${numberOfBuy[i].name} ${numberOfBuy[i].numberOfBuy} fois avec ${numberOfBuy[i].TotalCost} points</li>`;
+            item.innerHTML = `<span class="btn m-2 text-info bg-dark">
+    Vous avez acheté le ticket ${numberOfBuy[i].name} ${numberOfBuy[i].numberOfBuy} fois avec ${numberOfBuy[i].TotalCost} points</span>`;
             messages.appendChild(item);
         }
     };
@@ -705,6 +705,7 @@ else {
             multi(multipli);
             notyf.success(`Option activée. Le nouveau prix est de : ${cost1 * 2} points`);
             getAllMultiplicateur();
+            displayBanque();
         } else notyf.error("Vous n'avez pas assez d'argent");
     }
     //fonction multi*4/2
@@ -735,6 +736,7 @@ else {
             viewScore.innerText = score; // update le score
             autoClick();
             notyf.success(`Option activée. Le nouveau prix est de : ${cost * 2} points`);
+            displayBanque();
             getAllMultiplicateur();
         }
     }
@@ -754,6 +756,7 @@ else {
             bonus();
             notyf.success(`Option activée. Le nouveau prix est de : ${cost * 2} points`);
             getAllMultiplicateur();
+            displayBanque();
         } else notyf.error("Vous n'avez pas assez de points!"); // pas nécessaire car boutton désactivé
     }
 //fonction reset mais en backend
