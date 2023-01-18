@@ -535,11 +535,7 @@ function hmrAcceptRun(bundle, id) {
 var _bootstrap = require("bootstrap");
 var _apicookies = require("./Apicookies");
 var _notyf = require("notyf");
-//modal
-/*document.addEventListener("DOMContentLoaded", function () {
-  var myModal = new bootstrap.Modal(document.getElementById("myModal"));
-  myModal.show();
-});*/ const notyf = new (0, _notyf.Notyf)({
+const notyf = new (0, _notyf.Notyf)({
     duration: 2000,
     position: {
         x: "right",
@@ -564,7 +560,8 @@ var _notyf = require("notyf");
     ]
 });
 const user = window.localStorage.getItem("user");
-if (user) {
+if (!user) window.location.href = "./login.html";
+else {
     //fonction incrémentation 
     let score = 0;
     let multiplier = 1;
@@ -642,7 +639,7 @@ if (user) {
         //le boutton clicker j'ai commencé par le boutto n2 d'indice 1
         for(let i = 2; i < 6; i++){
             allButtons[i].disabled = score < multipli[i - 2].cost;
-            if (i < 3) allButtons[i].addEventListener("click", ()=>{
+            if (i < 4) allButtons[i].addEventListener("click", ()=>{
                 console.log(multipli[i - 2].multi);
                 buyMulti(multipli[i - 2].multi, multipli[i - 2].cost);
                 //update score and cost
@@ -695,21 +692,18 @@ if (user) {
         } else increment();
     });
     const increment = ()=>{
-        console.log(multiplier);
         score += multiplier;
         viewScore.innerText = score;
         getAllMultiplicateur();
     };
     // fonction pour achat multi2/4
     function buyMulti(multipli, cost1) {
-        multi(multipli);
+        console.log(multipli, cost1);
         if (score >= cost1) {
             score -= cost1;
             viewScore.innerText = score;
             multi(multipli);
-            // augmente le prix pour le prochain achat 
-            notyf.success("Option activ\xe9e. Le nouveau prix est de : ", cost1 * 2);
-            //btnMulti2.textContent = "Multi*2 ----" + costMulti2
+            notyf.success(`Option activée. Le nouveau prix est de : ${cost1 * 2} points`);
             getAllMultiplicateur();
         } else notyf.error("Vous n'avez pas assez d'argent");
     }
@@ -718,9 +712,9 @@ if (user) {
         multiplier = multipli;
         viewScore.innerText = score;
         setTimeout(function() {
-            notyf.success("ticket finalis\xe9");
+            notyf.success("option expir\xe9e");
             multiplier = 1;
-        }, 15000);
+        }, 30000);
     }
     //fonction autoClick
     function autoClick() {
@@ -730,9 +724,9 @@ if (user) {
             viewScore.textContent = score;
         }, 1000);
         setTimeout(()=>{
-            notyf.success("ticket finalis\xe9");
+            notyf.success("option expir\xe9e");
             clearInterval(autoClick);
-        }, 10000);
+        }, 30000);
     }
     // fonction pour achat autoClick
     function buyAutoClick(costAutoClick) {
@@ -740,7 +734,7 @@ if (user) {
             score -= costAutoClick; // déduire le prix d'achat du score 
             viewScore.innerText = score; // update le score
             autoClick();
-            notyf.success("Option activ\xe9e. Le nouveau prix est de: " + cost * 2);
+            notyf.success(`Option activée. Le nouveau prix est de : ${cost * 2} points`);
             getAllMultiplicateur();
         }
     }
@@ -748,7 +742,7 @@ if (user) {
     function bonus() {
         startBonus = 5;
         setInterval(()=>{
-            if (startBonus >= 0) document.getElementById("timer").innerText = "00:" + startBonus + "0";
+            if (startBonus >= 0) document.getElementById("timer").innerText = startBonus;
             startBonus >= 0 ? startBonus-- : startBonus;
         }, 1000);
     }
@@ -758,54 +752,12 @@ if (user) {
             score -= costBonus;
             viewScore.innerText = score;
             bonus();
-            notyf.success("Option activ\xe9e. Le nouveau prix est de: ");
+            notyf.success(`Option activée. Le nouveau prix est de : ${cost * 2} points`);
             getAllMultiplicateur();
         } else notyf.error("Vous n'avez pas assez de points!"); // pas nécessaire car boutton désactivé
     }
-    //fonction reset mais en backend
-    const resetBackend = async ()=>{
-        try {
-            let player = window.localStorage.getItem("user");
-            let currentPlayer = await (0, _apicookies.getOnePlayer)(JSON.parse(player).id);
-            currentPlayer.score = 0;
-            currentPlayer.multiplicateur = [
-                {
-                    "name": "X2",
-                    "multi": 2,
-                    "cost": 200,
-                    "numberOfBuy": 0,
-                    "Totalcoast": 0
-                },
-                {
-                    "name": "X4",
-                    "multi": 4,
-                    "cost": 400,
-                    "numberOfBuy": 0,
-                    "Totalcoast": 0
-                },
-                {
-                    "name": "Auto",
-                    "multi": 1,
-                    "cost": 1000,
-                    "numberOfBuy": 0,
-                    "Totalcoast": 0
-                },
-                {
-                    "name": "Bonus",
-                    "multi": 1,
-                    "cost": 5000,
-                    "numberOfBuy": 0,
-                    "Totalcoast": 0
-                }
-            ];
-            let updatedPlayer = await (0, _apicookies.updatecurrentPlayer)(currentPlayer);
-            window.localStorage.setItem("user", JSON.stringify(updatedPlayer));
-            return updatedPlayer;
-        } catch (err) {
-            console.log(err);
-        }
-    };
-} else window.location.href = "./login.html";
+//fonction reset mais en backend
+}
 
 },{"bootstrap":"h36JB","./Apicookies":"03kzI","notyf":"2LIPM"}],"h36JB":[function(require,module,exports) {
 /*!
