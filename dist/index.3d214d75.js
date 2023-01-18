@@ -536,7 +536,7 @@ var _bootstrap = require("bootstrap");
 var _apicookies = require("./Apicookies");
 var _notyf = require("notyf");
 const notyf = new (0, _notyf.Notyf)({
-    duration: 2000,
+    duration: 3000,
     position: {
         x: "right",
         y: "top"
