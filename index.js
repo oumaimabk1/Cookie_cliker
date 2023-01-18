@@ -2,12 +2,6 @@ import * as bootstrap from "bootstrap";
 import { getPlayers, updatecurrentPlayer, getOnePlayer,resetPlayer } from './Apicookies';
 import { Notyf } from 'notyf';
 
-//modal
-/*document.addEventListener("DOMContentLoaded", function () {
-  var myModal = new bootstrap.Modal(document.getElementById("myModal"));
-  myModal.show();
-});*/
-
 const notyf = new Notyf({
   duration: 3000,
   position: {
@@ -33,7 +27,9 @@ const notyf = new Notyf({
   ]
 });
 const user = window.localStorage.getItem("user");
-if (user){
+if (!user){
+  window.location.href='./login.html'
+}else{
 //fonction incrémentation 
 let score = 0;
 let multiplier = 1;
@@ -70,7 +66,7 @@ const displayBanque = async () => {
   for (var i = 0; i < numberOfBuy.length; i++) {
     var item = document.createElement("li");
     item.innerHTML = `<li class="btn m-2 text-info bg-dark">
-    Vous avez acheter le ticket ${numberOfBuy[i].name} ${numberOfBuy[i].numberOfBuy} fois avec ${numberOfBuy[i].TotalCost} points</li>`;
+    Vous avez acheté le ticket ${numberOfBuy[i].name} ${numberOfBuy[i].numberOfBuy} fois avec ${numberOfBuy[i].TotalCost} points</li>`;
     messages.appendChild(item);
   }
 }
@@ -123,7 +119,7 @@ const getAllMultiplicateur = async () => {
   //le boutton clicker j'ai commencé par le boutto n2 d'indice 1
   for (let i = 2; i < 6; i++) {
     allButtons[i].disabled = score < multipli[i - 2].cost
-    if (i < 3) {
+    if (i < 4) {
       allButtons[i].addEventListener('click', () => {
         console.log(multipli[i - 2].multi)
         buyMulti(multipli[i - 2].multi, multipli[i - 2].cost)
@@ -172,7 +168,6 @@ const getAllMultiplicateur = async () => {
 
 getAllMultiplicateur();
 
-
 let startBonus;
 //boutton clicker
 buttonClicker.addEventListener("click", () => {
@@ -190,7 +185,6 @@ buttonClicker.addEventListener("click", () => {
 });
 
 const increment = () => {
-  console.log(multiplier)
   score += multiplier;
   viewScore.innerText = score;
   getAllMultiplicateur();
@@ -199,14 +193,12 @@ const increment = () => {
 
 // fonction pour achat multi2/4
 function buyMulti(multipli, cost) {
-  multi(multipli);
+  console.log(multipli, cost)
   if (score >= cost) {
     score -= cost;
     viewScore.innerText = score;
     multi(multipli);
-    // augmente le prix pour le prochain achat 
-    notyf.success("Option activée. Le nouveau prix est de : ", cost * 2);
-    //btnMulti2.textContent = "Multi*2 ----" + costMulti2
+    notyf.success(`Option activée. Le nouveau prix est de : ${cost*2} points`);
     getAllMultiplicateur();
   } else {
     notyf.error("Vous n'avez pas assez d'argent");
@@ -217,9 +209,9 @@ function multi(multipli) {
   multiplier = multipli;
   viewScore.innerText = score;
   setTimeout(function () {
-    notyf.success('ticket finalisé')
+    notyf.success('option expirée')
     multiplier = 1;
-  }, 15000);
+  }, 30000);
 }
 
 //fonction autoClick
@@ -231,9 +223,9 @@ function autoClick() {
       viewScore.textContent = score;
     }, 1000);
   setTimeout(() => {
-    notyf.success('ticket finalisé')
+    notyf.success('option expirée')
     clearInterval(autoClick);
-  }, 10000);
+  }, 30000);
 }
 
 // fonction pour achat autoClick
@@ -242,7 +234,7 @@ function buyAutoClick(costAutoClick) {
     score -= costAutoClick;       // déduire le prix d'achat du score 
     viewScore.innerText = score; // update le score
     autoClick()
-    notyf.success("Option activée. Le nouveau prix est de: " + cost * 2);
+    notyf.success(`Option activée. Le nouveau prix est de : ${cost*2} points`);
 
     getAllMultiplicateur();
   }
@@ -253,8 +245,7 @@ function bonus() {
   startBonus = 5;
   setInterval(() => {
     if (startBonus >= 0) {
-      document.getElementById('timer').innerText = "00:" + startBonus + "0";
-
+      document.getElementById('timer').innerText = startBonus;
     }
     startBonus >= 0 ? startBonus-- : startBonus;
   }, 1000);
@@ -266,55 +257,11 @@ function buyBonus(costBonus) {
     score -= costBonus;
     viewScore.innerText = score;
     bonus()
-    notyf.success("Option activée. Le nouveau prix est de: ");
+    notyf.success(`Option activée. Le nouveau prix est de : ${cost*2} points`);
     getAllMultiplicateur();
   } else {
     notyf.error("Vous n'avez pas assez de points!");// pas nécessaire car boutton désactivé
   }
 }
 //fonction reset mais en backend
-const resetBackend = async () => {
-  try {
-    let player = window.localStorage.getItem("user");
-    let currentPlayer = await getOnePlayer(JSON.parse(player).id);
-    currentPlayer.score = 0;
-    currentPlayer.multiplicateur = [{
-      "name": "X2",
-      "multi": 2,
-      "cost": 200,
-      "numberOfBuy": 0,
-      "Totalcoast": 0
-    },
-    {
-      "name": "X4",
-      "multi": 4,
-      "cost": 400,
-      "numberOfBuy": 0,
-      "Totalcoast": 0
-    },
-    {
-      "name": "Auto",
-      "multi": 1,
-      "cost": 1000,
-      "numberOfBuy": 0,
-      "Totalcoast": 0
-    },
-    {
-      "name": "Bonus",
-      "multi": 1,
-      "cost": 5000,
-      "numberOfBuy": 0,
-      "Totalcoast": 0
-    }]
-    let updatedPlayer = await updatecurrentPlayer(currentPlayer);
-    window.localStorage.setItem("user", JSON.stringify(updatedPlayer));
-    return updatedPlayer;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-
-}else{
-  window.location.href='./login.html'
 }

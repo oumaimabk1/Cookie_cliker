@@ -1,8 +1,3 @@
-
-
-
-
-
 body {
     font-size: "Times New Roman";
     Color: white;
@@ -17,8 +12,8 @@ body {
     height: 200px;
     background: url('./images/play.svg');
     border-style: none;
+}
 
- }
 .btn{
     background: url('./images/pad.png');
     position: relative;
@@ -39,6 +34,7 @@ body {
     position: absolute;
     top: 0;
     left: 2;
+    
 }
 .bottom{
     position: absolute;

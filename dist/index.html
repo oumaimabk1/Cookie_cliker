@@ -1,1 +1,107 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Cookie Clicker</title><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin><link rel="stylesheet" href="/index.87aefa0f.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"></head><body class="body overflow-hidden"> <header class="align-items-center container d-flex justify-content-center"> <ul class="d-flex justify-content-between mt-2 nav nav-pills"> <li> <h4 class="bg-dark border border-success p-2 rounded-2 text-center">Click Manette</h4></li> <li class="mr-10 nav-item"> <a class="fw-bold nav-link text-light" href="#" id="player">Joueur :</a> </li> <li class="mr-10 nav-item"> <a class="fw-bold nav-link text-light" href="#" id="best_score">Meuilleur score</a> </li> <li class="nav-item"> <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"> Instructions </button> <div class="fade modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title text-dark" id="ModalLabel">Instructions</h5> </div> <div class="modal-body text-dark"> <p>Le but du jeu est simple: faire un score de minimum 100000 en 3 minutes. Il suffit de cliquer sur la manette pour augmenter ton score, en t'aidant des différentes options proposées. </p> <p>Multi2: chaque click vaudra 2 points pendant 30 secondes. <br>-Prix initial: 50 points. <br> -Ce prix sera multiplié par 2 après chaque achat. </p> <p>Multi4: chaque click vaudra 4 points pendant 30 secondes. <br> -Prix initial: 80 points. <br> -Ce prix sera multiplié par 3 après chaque achat. </p> <p>AutoClicker: le score augmente de 10 chaque 10 secondes pendant 30 secondes. <br> -Prix initial: 100 points. <br> -Ce prix sera multiplié par 2 après chaque achat. </p> <p>Bonus: c'est le score qui sera multiplié par 2 à chaque click pendant 30 secondes. <br> -Prix initial: 200 points. <br> -Ce prix sera multiplié par 3 après chaque achat. </p> </div> </div> </div> </div> </li> </ul> </header> <div class="container d-flex flex-wrap-reverse justify-content-around"> <div class="d-flex flex-column justify-content-center my-3"> <div class="justify-content-center row"> <div> <h1 class="text-center">Scores</h1> <div> <p class="align-content-center fs-2 fw-bold m-2 score text-warning">score </p> <p class="text-center" id="viewScore"></p> </div> </div> </div> <div class="d-flex joystick justify-content-center mx-4 p-3"> <button type="button" class="btn pad" id="clicker"> </button> </div> <div class="align-content-center d-flex d-sm-flex-wrap justify-content-center mx-4 wrapper"> <div id="buttons"> </div> </div> </div> </div> <footer class="fixed-bottom mx-5 row text-light"> <div class="justify-content-center mt-5 text-light w-lg-25 w-md-25 w-sm-100"> <ul id="messages" class="list-unstyled"> </ul> </div> </footer> <script type="module" src="/index.6bb75f0d.js"></script> </body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cookie Clicker</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="/index.e5980c4e.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+</head>
+
+<body class="body overflow-hidden">
+
+  <header class="container d-flex justify-content-center align-items-center">
+    <ul class="nav nav-pills mt-2 d-flex justify-content-between">
+      
+      <li class="nav-item mr-10">
+        <a class="nav-link text-light fs-2 fw-bold" href="#" id="player">Joueur :</a>
+      </li>
+      <li class="nav-item mr-10">
+        <a class="nav-link text-light fs-2 fw-bold" href="#" id="best_score">Meuilleur score :</a>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <span class="material-symbols-outlined">
+            key
+            </span>
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-dark" id="ModalLabel">Instructions</h5>
+
+              </div>
+              <div class="modal-body text-dark">
+                <p>Le but du jeu est simple: faire un score de minimum 100000 en 3 minutes.
+                  Il suffit de cliquer sur la manette pour augmenter ton score, en t'aidant des différentes options
+                  proposées.
+                </p>
+                <p>Multi2: chaque click vaudra 2 points pendant 30 secondes.
+                  <br>-Prix initial: 50 points.
+                  <br> -Ce prix sera multiplié par 2 après chaque achat.
+                </p>
+                <p>Multi4: chaque click vaudra 4 points pendant 30 secondes.
+                  <br> -Prix initial: 80 points.
+                  <br> -Ce prix sera multiplié par 3 après chaque achat.
+                </p>
+                <p>AutoClicker: le score augmente de 10 chaque 10 secondes pendant 30 secondes.
+                  <br> -Prix initial: 100 points.
+                  <br> -Ce prix sera multiplié par 2 après chaque achat.
+                </p>
+                <p>Bonus: c'est le score qui sera multiplié par 2 à chaque click pendant 30 secondes.
+                  <br> -Prix initial: 200 points.
+                  <br> -Ce prix sera multiplié par 3 après chaque achat.
+                </p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+  </header>
+
+  
+  <div class="container d-flex flex-wrap-reverse justify-content-around ">
+
+    <div class="d-flex flex-column  justify-content-center my-3">
+      <div class="row justify-content-center">
+        <div>
+          <h1 class="text-center  text-warning">Scores</h1>
+          <div>
+            
+            <p class="text-center fs-2 fw-bold" id="viewScore"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="joystick mx-4 p-3 d-flex justify-content-center">
+        <button type="button" class="pad btn" id="clicker">
+
+        </button>
+      </div>
+      <div class="wrapper d-flex d-sm-flex-wrap justify-content-center align-content-center mx-4">
+        <div id="buttons">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="row fixed-bottom text-light mx-5">
+    <div class="justify-content-center text-light w-lg-25 w-sm-100 w-md-25 mt-5">
+      <ul id="messages" class="list-unstyled">
+
+      </ul>
+    </div>
+  </footer>
+  <script src="/index.3d214d75.js" defer=""></script>
+</body>
+
+</html>
